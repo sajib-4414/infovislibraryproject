@@ -15,6 +15,7 @@
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'slick/slick.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'slick/slick-theme.css' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
     <style>
         .slick-prev:before, .slick-next:before {
     color: #09529b !important;
@@ -58,9 +59,9 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 {#      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="min-width: 400px">#}
-                <div class="input-group mb-3 " style="margin-top: 12px">
+                <div class="input-group">
                     <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                        <button class="btn btn-light dropdown-toggle border-right" type="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">Dropdown
                         </button>
                         <div class="dropdown-menu">
@@ -71,34 +72,15 @@
                             <a class="dropdown-item" href="#">Separated link</a>
                         </div>
                     </div>
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button" style="min-width: 400px">
+                    <div class="input-group-append">
+                        <button class="btn btn-light border-left" type="button"><em class="fa fa-search"></em></button>
+                    </div>
                 </div>
 
             </form>
         </div>
-        {#      <a class="navbar-brand" href="#">Start Bootstrap</a>#}
-        {#      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">#}
-        {#        <span class="navbar-toggler-icon"></span>#}
-        {#      </button>#}
-        {#      <div class="collapse navbar-collapse" id="navbarResponsive">#}
-        {#        <ul class="navbar-nav ml-auto">#}
-        {#          <li class="nav-item active">#}
-        {#            <a class="nav-link" href="#">Home#}
-        {#              <span class="sr-only">(current)</span>#}
-        {#            </a>#}
-        {#          </li>#}
-        {#          <li class="nav-item">#}
-        {#            <a class="nav-link" href="#">About</a>#}
-        {#          </li>#}
-        {#          <li class="nav-item">#}
-        {#            <a class="nav-link" href="#">Services</a>#}
-        {#          </li>#}
-        {#          <li class="nav-item">#}
-        {#            <a class="nav-link" href="#">Contact</a>#}
-        {#          </li>#}
-        {#        </ul>#}
-        {#      </div>#}
+
     </div>
 </nav>
 
