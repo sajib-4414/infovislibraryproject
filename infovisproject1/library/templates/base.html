@@ -8,20 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    {% block title %}
+<!-- When extending this base page, write title of the page in this block -->
+    {% endblock %}
 
-    <title>Heroic Features - Start Bootstrap Template</title>
+
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'slick/slick.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'slick/slick-theme.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/overall-style.css' %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-    <style>
-        .slick-prev:before, .slick-next:before {
-            color: #09529b !important;
-            font-size: 50px;
-        }
-    </style>
+    {% block css %}
+    <!-- Include page specific styles here -->
+    {% endblock %}
 
 
     <!-- Custom styles for this template -->
@@ -75,8 +76,7 @@
                             {#                            <a class="dropdown-item" href="#">Separated link</a>#}
                         </div>
                     </div>
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button"
-                           style="min-width: 400px">
+                    <input type="text" class="form-control" id="searchfield" aria-label="Text input with dropdown button">
                     <div class="input-group-append">
                         <button class="btn btn-light border-left" type="button"><em class="fa fa-search"></em></button>
                     </div>
@@ -91,6 +91,7 @@
 <!-- Page Content -->
 <div class="container">
     {% block content %}
+        <!-- Extend this base template and add the page content here -->
     {% endblock %}
 
 
@@ -109,29 +110,11 @@
 <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-{#<script type="text/javascript" src="{% static 'vendor/jquery/jquery-1.11.0.min.js' %}"></script>#}
-{#<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>#}
 <script type="text/javascript" src="{% static 'slick/slick.min.js' %}"></script>
-<script type="text/javascript">
-    $(function () {
-        $("#saerch-dropdown-id a").click(function () {
-            $("#AdvancedSearch .selection").text($(this).text());
+{% block js %}
+<!-- When extending this base template, then write page specific js codes in this block -->
+{% endblock %}
 
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.my-slider-class').slick({
-            infinite: false,
-            slidesToShow: 4,
-            slidesToScroll: 3,
-            arrows: true,
-            dots: true
-        });
-    });
-</script>
 
 
 </body>

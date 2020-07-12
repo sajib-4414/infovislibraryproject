@@ -1,4 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Home</title>
+{% endblock %}
+
+    {% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index-page-style.css' %}"/>
+    {% endblock %}
+
 {% block content %}
     <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
@@ -99,7 +109,30 @@
     </div>
     <!-- /.row -->
 
-
 {% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(function () {
+            $("#saerch-dropdown-id a").click(function () {
+                $("#AdvancedSearch .selection").text($(this).text());
+
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.my-slider-class').slick({
+                infinite: false,
+                slidesToShow: 4,
+                slidesToScroll: 3,
+                arrows: true,
+                dots: true
+            });
+        });
+    </script>
+{% endblock %}
+
 
 
