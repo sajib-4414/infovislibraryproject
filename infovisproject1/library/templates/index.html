@@ -18,10 +18,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
     <style>
         .slick-prev:before, .slick-next:before {
-    color: #09529b !important;
+            color: #09529b !important;
             font-size: 50px;
-    }
+        }
     </style>
+
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/heroic-features.css' %}" rel="stylesheet">
@@ -62,17 +63,20 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <button class="btn btn-light dropdown-toggle border-right" type="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">Dropdown
+                                aria-haspopup="true" aria-expanded="false" id="AdvancedSearch"><span class="selection">All</span>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">All</a>
                             <div role="separator" class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
+                            <a class="dropdown-item" href="#">Keywords</a>
+                            <a class="dropdown-item" href="#">Subjects</a>
+                            {#                            <a class="dropdown-item" href="#">Something else here</a>#}
+                            {#                            <div role="separator" class="dropdown-divider"></div>#}
+                            {#                            <a class="dropdown-item" href="#">Separated link</a>#}
                         </div>
                     </div>
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button" style="min-width: 400px">
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button"
+                           style="min-width: 400px">
                     <div class="input-group-append">
                         <button class="btn btn-light border-left" type="button"><em class="fa fa-search"></em></button>
                     </div>
@@ -141,7 +145,7 @@
             </div>
         </div>
 
-                <div class="col-lg-3 col-md-6 mb-4">
+        <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
                 <img class="card-img-top" src="http://placehold.it/500x325" alt="">
                 <div class="card-body">
@@ -155,7 +159,7 @@
             </div>
         </div>
 
-                <div class="col-lg-3 col-md-6 mb-4">
+        <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
                 <img class="card-img-top" src="http://placehold.it/500x325" alt="">
                 <div class="card-body">
@@ -204,6 +208,14 @@
 {#<script type="text/javascript" src="{% static 'vendor/jquery/jquery-1.11.0.min.js' %}"></script>#}
 {#<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>#}
 <script type="text/javascript" src="{% static 'slick/slick.min.js' %}"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".dropdown-menu a").click(function () {
+            $("#AdvancedSearch .selection").text($(this).text());
+
+        });
+    });
+</script>
 
 <script type="text/javascript">
     $(document).ready(function () {
