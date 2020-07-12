@@ -65,7 +65,7 @@
                         <button class="btn btn-light dropdown-toggle border-right" type="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false" id="AdvancedSearch"><span class="selection">All</span>
                         </button>
-                        <div class="dropdown-menu">
+                        <div class="dropdown-menu" id="saerch-dropdown-id">
                             <a class="dropdown-item" href="#">All</a>
                             <div role="separator" class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Keywords</a>
@@ -210,7 +210,7 @@
 <script type="text/javascript" src="{% static 'slick/slick.min.js' %}"></script>
 <script type="text/javascript">
     $(function () {
-        $(".dropdown-menu a").click(function () {
+        $("#saerch-dropdown-id a").click(function () {
             $("#AdvancedSearch .selection").text($(this).text());
 
         });
