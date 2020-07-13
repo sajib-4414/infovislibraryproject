@@ -5,11 +5,26 @@ import requests
 # Create your views here.
 
 
+def get_books_of_subjects(subject):
+    response = requests.get('http://openlibrary.org/subjects/' + subject + '.json?limit=9')
+    if response.status_code == 200:
+        json_response = response.json()
+        books = json_response['works']
+        return books
+    return []
+
 
 def index(request):
     # post = Post.objects.filter(status='published')
     template = 'index.html'
-    context = {}
+    romance_books = get_books_of_subjects("romance")
+    thriller_books = get_books_of_subjects("thriller");
+    arts_books = get_books_of_subjects("arts");
+    context = {
+        "romance_books" : romance_books,
+        "thriller_books": thriller_books,
+        "arts_books"    : arts_books
+    }
     return render(request, template, context)
     # return HttpResponse("Hello, world. You're at the polls index.")
 

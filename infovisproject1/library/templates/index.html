@@ -28,194 +28,220 @@
             <h5 class="card-title">Thriller books</h5>
         </div>
         <div class="card-body">
-{#            <h5 class="card-title">Special title treatment</h5>#}
-                <div class="row text-center my-slider-class">
+            {#            <h5 class="card-title">Special title treatment</h5>#}
+            <div class="row text-center my-slider-class">
 
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
-                        necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
+                {% for book in romance_books %}
+{#                    <h2><a href="{{ posts.get_absolute_url }}"> {{ posts.title }}  </a></h2>#}
+{#                    <small> Written by {{ posts.author }} on {{ posts.published }} in#}
+{#                        <a href="{{ posts.category.get_absolute_url }}"> {{ posts.category }}</a>#}
+{#                    </small>#}
+{#                    {{ posts.content|truncatewords:40|linebreaks }}#}
 
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni
-                        sapiente, tempore debitis beatae culpa natus architecto.</p>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        {{book.cover_id}}
+                        <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_id}}-S" alt="cannot load image">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ book.title }}</h4>
+                            <p class="card-text">Author: "{{ book.authors.first.name }}"</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
-                        necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
+                {% endfor %}
+{#                <div class="col-lg-3 col-md-6 mb-4">#}
+{#                    <div class="card h-100">#}
+{#                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">#}
+{#                        <div class="card-body">#}
+{#                            <h4 class="card-title">Card title</h4>#}
+{#                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse#}
+{#                                necessitatibus neque.</p>#}
+{#                        </div>#}
+{#                        <div class="card-footer">#}
+{#                            <a href="#" class="btn btn-primary">Find Out More!</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
 
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
-                        necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
+{#                <div class="col-lg-3 col-md-6 mb-4">#}
+{#                    <div class="card h-100">#}
+{#                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">#}
+{#                        <div class="card-body">#}
+{#                            <h4 class="card-title">Card title</h4>#}
+{#                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo#}
+{#                                magni#}
+{#                                sapiente, tempore debitis beatae culpa natus architecto.</p>#}
+{#                        </div>#}
+{#                        <div class="card-footer">#}
+{#                            <a href="#" class="btn btn-primary">Find Out More!</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
 
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
-                        necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
+{#                <div class="col-lg-3 col-md-6 mb-4">#}
+{#                    <div class="card h-100">#}
+{#                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">#}
+{#                        <div class="card-body">#}
+{#                            <h4 class="card-title">Card title</h4>#}
+{#                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse#}
+{#                                necessitatibus neque.</p>#}
+{#                        </div>#}
+{#                        <div class="card-footer">#}
+{#                            <a href="#" class="btn btn-primary">Find Out More!</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
 
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni
-                        sapiente, tempore debitis beatae culpa natus architecto.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
+{#                <div class="col-lg-3 col-md-6 mb-4">#}
+{#                    <div class="card h-100">#}
+{#                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">#}
+{#                        <div class="card-body">#}
+{#                            <h4 class="card-title">Card title</h4>#}
+{#                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse#}
+{#                                necessitatibus neque.</p>#}
+{#                        </div>#}
+{#                        <div class="card-footer">#}
+{#                            <a href="#" class="btn btn-primary">Find Out More!</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
+{#                <div class="col-lg-3 col-md-6 mb-4">#}
+{#                    <div class="card h-100">#}
+{#                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">#}
+{#                        <div class="card-body">#}
+{#                            <h4 class="card-title">Card title</h4>#}
+{#                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse#}
+{#                                necessitatibus neque.</p>#}
+{#                        </div>#}
+{#                        <div class="card-footer">#}
+{#                            <a href="#" class="btn btn-primary">Find Out More!</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
+{#                <div class="col-lg-3 col-md-6 mb-4">#}
+{#                    <div class="card h-100">#}
+{#                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">#}
+{#                        <div class="card-body">#}
+{#                            <h4 class="card-title">Card title</h4>#}
+{#                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo#}
+{#                                magni#}
+{#                                sapiente, tempore debitis beatae culpa natus architecto.</p>#}
+{#                        </div>#}
+{#                        <div class="card-footer">#}
+{#                            <a href="#" class="btn btn-primary">Find Out More!</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
             </div>
+            <!-- /.row -->
+            <a href="#" class="btn btn-primary float-right">See more in this subject!</a>
         </div>
 
     </div>
-    <!-- /.row -->
-<a href="#" class="btn btn-primary float-right">See more in this subject!</a>
-        </div>
-
-    </div>
-<br>
+    <br>
     <div class="card">
         <div class="card-header">
             <h5 class="card-title">Romance books</h5>
         </div>
         <div class="card-body">
-{#            <h5 class="card-title">Special title treatment</h5>#}
-                <div class="row text-center my-slider-class">
+            {#            <h5 class="card-title">Special title treatment</h5>#}
+            <div class="row text-center my-slider-class">
 
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
-                        necessitatibus neque.</p>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
+                                necessitatibus neque.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+                                magni
+                                sapiente, tempore debitis beatae culpa natus architecto.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
+                                necessitatibus neque.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
+                                necessitatibus neque.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
+                                necessitatibus neque.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+                                magni
+                                sapiente, tempore debitis beatae culpa natus architecto.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni
-                        sapiente, tempore debitis beatae culpa natus architecto.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
-                        necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
-                        necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
-                        necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni
-                        sapiente, tempore debitis beatae culpa natus architecto.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <!-- /.row -->
+            <!-- /.row -->
 
         </div>
     </div>
@@ -226,95 +252,97 @@
             <h5 class="card-title">Arts books</h5>
         </div>
         <div class="card-body">
-{#            <h5 class="card-title">Special title treatment</h5>#}
-                <div class="row text-center my-slider-class">
+            {#            <h5 class="card-title">Special title treatment</h5>#}
+            <div class="row text-center my-slider-class">
 
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
-                        necessitatibus neque.</p>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
+                                necessitatibus neque.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+                                magni
+                                sapiente, tempore debitis beatae culpa natus architecto.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
+                                necessitatibus neque.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
+                                necessitatibus neque.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
+                                necessitatibus neque.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+                                magni
+                                sapiente, tempore debitis beatae culpa natus architecto.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni
-                        sapiente, tempore debitis beatae culpa natus architecto.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
-                        necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
-                        necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse
-                        necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni
-                        sapiente, tempore debitis beatae culpa natus architecto.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <!-- /.row -->
+            <!-- /.row -->
 
         </div>
     </div>
