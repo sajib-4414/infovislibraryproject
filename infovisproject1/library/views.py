@@ -38,3 +38,16 @@ def my_django_view(request):
         key= response2['key']
         return HttpResponse(str(key))
     return HttpResponse('Could not save data'+str(response.status_code))
+
+def search_result(request):
+    # post = Post.objects.filter(status='published')
+    template = 'search-results-page-basic.html'
+    # romance_books = get_books_of_subjects("romance")
+    # thriller_books = get_books_of_subjects("thriller");
+    # arts_books = get_books_of_subjects("arts");
+    context = {
+        # "romance_books" : romance_books,
+        # "thriller_books": thriller_books,
+        # "arts_books"    : arts_books
+    }
+    return render(request, template, context)
