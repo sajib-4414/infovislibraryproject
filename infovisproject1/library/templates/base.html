@@ -18,15 +18,19 @@
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'slick/slick.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'slick/slick-theme.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/overall-style.css' %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/overall-style.css' %}"/>
+
+<!-- Custom styles for this template -->
+    <link href="{% static 'css/heroic-features.css' %}" rel="stylesheet">
+{#<link rel="stylesheet" type="text/css" href="{% static 'css/overall-style.css' %}"/>#}
     {% block css %}
     <!-- Include page specific styles here -->
     {% endblock %}
 
 
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/heroic-features.css' %}" rel="stylesheet">
+
+
 
 </head>
 
