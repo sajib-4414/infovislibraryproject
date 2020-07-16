@@ -40,8 +40,7 @@
 
                     <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card h-100">
-                        {{book.cover_id}}
-                        <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_id}}-S" alt="cannot load image">
+                        <img class="card-img-top" style="height: 220px" src="http://covers.openlibrary.org/b/id/{{book.cover_id}}-M.jpg" alt="cannot load image">
                         <div class="card-body">
                             <h4 class="card-title">{{ book.title }}</h4>
                             <p class="card-text">Author: "{{ book.authors.first.name }}"</p>
