@@ -42,10 +42,20 @@ def my_django_view(request):
 def search_result(request):
     # post = Post.objects.filter(status='published')
     template = 'search-results-page-basic.html'
+    keywords = request.GET['keywords']
+    keywords_with_space = keywords.replace("+"," ")
+    query = 'http://openlibrary.org/search.json?q='+ keywords+'&&limit=10'
+    response = requests.get(query)
+    response2 = response.json()
+    documents = response2['docs']
+
+    # print(keywords_with_space)
     # romance_books = get_books_of_subjects("romance")
     # thriller_books = get_books_of_subjects("thriller");
     # arts_books = get_books_of_subjects("arts");
     context = {
+        "searched_keywords": keywords_with_space,
+        "documents"        : documents
         # "romance_books" : romance_books,
         # "thriller_books": thriller_books,
         # "arts_books"    : arts_books

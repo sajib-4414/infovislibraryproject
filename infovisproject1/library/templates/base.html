@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     {% block title %}
-<!-- When extending this base page, write title of the page in this block -->
+        <!-- When extending this base page, write title of the page in this block -->
     {% endblock %}
 
 
@@ -21,15 +21,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/overall-style.css' %}"/>
 
-<!-- Custom styles for this template -->
+    <!-- Custom styles for this template -->
     <link href="{% static 'css/heroic-features.css' %}" rel="stylesheet">
-{#<link rel="stylesheet" type="text/css" href="{% static 'css/overall-style.css' %}"/>#}
+    {#<link rel="stylesheet" type="text/css" href="{% static 'css/overall-style.css' %}"/>#}
     {% block css %}
-    <!-- Include page specific styles here -->
+        <!-- Include page specific styles here -->
     {% endblock %}
-
-
-
 
 
 </head>
@@ -63,7 +60,8 @@
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <form class="form-inline my-2 my-lg-0" action="{% url 'library:search_result' %}" method="get">
+
                 {#      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="min-width: 400px">#}
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -80,9 +78,17 @@
                             {#                            <a class="dropdown-item" href="#">Separated link</a>#}
                         </div>
                     </div>
-                    <input type="text" class="form-control" id="searchfield" aria-label="Text input with dropdown button">
+                    {% if searched_keywords %}
+                        <input type="text" name="keywords" class="form-control" id="searchfield"
+                               aria-label="Text input with dropdown button" value="{{ searched_keywords }}">
+                    {% else %}
+                        <input type="text" name="keywords" class="form-control" id="searchfield"
+                               aria-label="Text input with dropdown button">
+                    {% endif %}
+
                     <div class="input-group-append">
-                        <button class="btn btn-light border-left" type="button"><em class="fa fa-search"><a href="{% url 'library:search_result' %}"></a></em></button>
+                        <button class="btn btn-light border-left" type="submit"><em class="fa fa-search"><a
+                                href=></a></em></button>
                     </div>
                 </div>
 
@@ -116,9 +122,8 @@
 
 <script type="text/javascript" src="{% static 'slick/slick.min.js' %}"></script>
 {% block js %}
-<!-- When extending this base template, then write page specific js codes in this block -->
+    <!-- When extending this base template, then write page specific js codes in this block -->
 {% endblock %}
-
 
 
 </body>
