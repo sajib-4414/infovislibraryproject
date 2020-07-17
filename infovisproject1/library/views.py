@@ -44,10 +44,15 @@ def search_result(request):
     template = 'search-results-page-basic.html'
     keywords = request.GET['keywords']
     keywords_with_space = keywords.replace("+"," ")
+    current_page_number = int(request.GET['pagenum'])
+    offset = (current_page_number - 1 )*10
     query = 'http://openlibrary.org/search.json?q='+ keywords+'&&limit=10'
+    if offset !=0:
+        query = query + '&&offset=' + str(offset)
     response = requests.get(query)
     response2 = response.json()
     documents = response2['docs']
+    print(request.GET)
 
     # print(keywords_with_space)
     # romance_books = get_books_of_subjects("romance")
@@ -55,8 +60,9 @@ def search_result(request):
     # arts_books = get_books_of_subjects("arts");
     context = {
         "searched_keywords": keywords_with_space,
+        "searched_keywords_with_plus": keywords,
         "documents"        : documents,
-        "existing_page_num": 1,
+        "existing_page_num": current_page_number,
         # "romance_books" : romance_books,
         # "thriller_books": thriller_books,
         # "arts_books"    : arts_books

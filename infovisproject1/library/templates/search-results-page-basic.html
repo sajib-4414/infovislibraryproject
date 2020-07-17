@@ -20,7 +20,7 @@
             <div class="card mb-3">
                 <div class="row no-gutters">
                     <div class="col-md-2">
-                        <img src="http://covers.openlibrary.org/b/id/{{ document.cover_i }}-M.jpg" class="card-img"
+                        <img src="http://covers.openlibrary.org/b/id/{{ document.cover_i }}-M.jpg" class="card-img-top"
                              alt="...">
                     </div>
                     <div class="col-md-8">
@@ -53,7 +53,7 @@
                     {% endif %}
                 {% endfor %}
             {% endif %}
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?keywords={{ searched_keywords_with_plus }}&&pagenum={{ existing_page_num|add:"1" }}">Next</a></li>
         </ul>
     </nav>
 
