@@ -55,7 +55,8 @@ def search_result(request):
     # arts_books = get_books_of_subjects("arts");
     context = {
         "searched_keywords": keywords_with_space,
-        "documents"        : documents
+        "documents"        : documents,
+        "existing_page_num": 1,
         # "romance_books" : romance_books,
         # "thriller_books": thriller_books,
         # "arts_books"    : arts_books
