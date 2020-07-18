@@ -68,7 +68,7 @@
                             <div class="card-body">
                                 <ul class="list-inline">
                                     {% for subject in document.subject %}
-                                        <li><a href="#">{{ subject }}</a></li>
+                                        <li><a href="/search?keywords={{subject.split|join:"+"}}&&pagenum=1">{{ subject }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>
