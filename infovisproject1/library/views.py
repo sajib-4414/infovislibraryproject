@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 import requests
+import copy
 # Create your views here.
 
 
@@ -43,16 +44,17 @@ def search_result(request):
     # post = Post.objects.filter(status='published')
     template = 'search-results-page-basic.html'
     keywords = request.GET['keywords']
-    keywords_with_space = keywords.replace("+"," ")
+    keyword_with_plus = keywords.replace(" ","+")
+    keywords_with_space = keywords
     current_page_number = int(request.GET['pagenum'])
     offset = (current_page_number - 1 )*10
-    query = 'http://openlibrary.org/search.json?q='+ keywords+'&&limit=10'
+    query = 'http://openlibrary.org/search.json?q='+ keyword_with_plus+'&&limit=10'
     if offset !=0:
         query = query + '&&offset=' + str(offset)
     response = requests.get(query)
     response2 = response.json()
     documents = response2['docs']
-    print(request.GET)
+    # print(request.GET)
 
     # print(keywords_with_space)
     # romance_books = get_books_of_subjects("romance")
@@ -60,9 +62,10 @@ def search_result(request):
     # arts_books = get_books_of_subjects("arts");
     context = {
         "searched_keywords": keywords_with_space,
-        "searched_keywords_with_plus": keywords,
+        "searched_keywords_with_plus": keyword_with_plus,
         "documents"        : documents,
         "existing_page_num": current_page_number,
+        "number_of_results": response2['numFound']
         # "romance_books" : romance_books,
         # "thriller_books": thriller_books,
         # "arts_books"    : arts_books
