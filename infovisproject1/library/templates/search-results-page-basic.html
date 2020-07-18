@@ -9,6 +9,7 @@
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/index-page-style.css' %}"/>
 
+
 {% endblock %}
 
 {% block content %}
@@ -23,11 +24,12 @@
                 <div class="row no-gutters">
                     <div class="col-md-2">
                         {% if document.cover_i %}
-                        <img src="http://covers.openlibrary.org/b/id/{{ document.cover_i }}-M.jpg" class="card-img-top"
-                             alt="image not found" >
+                            <img src="http://covers.openlibrary.org/b/id/{{ document.cover_i }}-M.jpg"
+                                 class="card-img-top"
+                                 alt="image not found">
                         {% else %}
-                            <img src="{%  static 'images/image-not-found-1024x576.png' %}" class="card-img-top"
-                             alt="image not found">
+                            <img src="{% static 'images/image-not-found-1024x576.png' %}" class="card-img-top"
+                                 alt="image not found">
                         {% endif %}
                     </div>
                     <div class="col-md-8">
@@ -39,7 +41,44 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="" id="headingTwo">
+                            <h2 class="mb-0">
+
+                                {% if document.subject %}
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                            data-target="#collapseTwo{{ document.first_publish_year }}"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                    Subjects in this document ({{ document.subject|length }})
+                                {% else %}
+                                    <button class="btn collapsed" type="button" data-toggle="collapse"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                    Subjects in this document (0)
+                                {% endif %}
+
+
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseTwo{{ document.first_publish_year }}" class="collapse"
+                             aria-labelledby="headingTwo"
+                             data-parent="#accordionExample">
+                            <div class="card-body">
+                                <ul class="list-inline">
+                                    {% for subject in document.subject %}
+                                        <li><a href="#">{{ subject }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+
         {% endfor %}
 
     </div>
@@ -50,17 +89,23 @@
                 {% if existing_page_num == 1 %}
                     <li class="page-item"><a class="page-link">Previous</a></li>
                 {% elif  existing_page_num > 1 %}
-                    <li class="page-item"><a class="page-link" href="?keywords={{ searched_keywords_with_plus }}&&pagenum={{ existing_page_num|add:"-1" }}">Previous</a></li>
+                    <li class="page-item"><a class="page-link"
+                                             href="?keywords={{ searched_keywords_with_plus }}&&pagenum={{ existing_page_num|add:"-1" }}">Previous</a>
+                    </li>
                 {% endif %}
                 {% for i in 1|range:11 %}
                     {% if existing_page_num == i %}
-                    <li class="page-item"><a class="page-link">{{ i }}</a></li>
+                        <li class="page-item"><a class="page-link">{{ i }}</a></li>
                     {% else %}
-                    <li class="page-item"><a class="page-link" href="?keywords={{ searched_keywords_with_plus }}&&pagenum={{ i }}" >{{ i }}</a></li>
+                        <li class="page-item"><a class="page-link"
+                                                 href="?keywords={{ searched_keywords_with_plus }}&&pagenum={{ i }}">{{ i }}</a>
+                        </li>
                     {% endif %}
                 {% endfor %}
             {% endif %}
-            <li class="page-item"><a class="page-link" href="?keywords={{ searched_keywords_with_plus }}&&pagenum={{ existing_page_num|add:"1" }}">Next</a></li>
+            <li class="page-item"><a class="page-link"
+                                     href="?keywords={{ searched_keywords_with_plus }}&&pagenum={{ existing_page_num|add:"1" }}">Next</a>
+            </li>
         </ul>
     </nav>
 
