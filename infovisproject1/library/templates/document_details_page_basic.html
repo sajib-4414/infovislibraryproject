@@ -10,68 +10,143 @@
 {% endblock %}
 
 {% block content %}
+    <br>
+    <!-- Portfolio Item Heading -->
+    {#  <h1 class="my-4">Page Heading#}
+    {#    <small>Secondary Text</small>#}
+    {#  </h1>#}
 
-     <!-- Portfolio Item Heading -->
-  <h1 class="my-4">Page Heading
-    <small>Secondary Text</small>
-  </h1>
+    <!-- Portfolio Item Row -->
+    <div class="row">
 
-  <!-- Portfolio Item Row -->
-  <div class="row">
+        <div class="col-md-4">
+            <img class="img-fluid" src="{{ document.cover.medium }}" width="300px" alt="">
+        </div>
 
-    <div class="col-md-8">
-      <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+        <div class="col-md-8">
+            <h3 class="my-3">{{ document.title }}</h3>
+            <b>Published: </b><span> {{ document.publish_date }}</span>
+            <br>
+            <b>Authors: </b>
+            <ul>
+                {% for author in document.authors %}
+                    <li>{{ author.name }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3 class="my-3">Project Details</h3>
+            <ul>
+                <li>Lorem Ipsum</li>
+                <li>Dolor Sit Amet</li>
+                <li>Consectetur</li>
+                <li>Adipiscing Elit</li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+    <!-- Related Projects Row -->
+    <h3 class="my-4">Explore relevant readings by subject</h3>
+    <div>
+
+        {% for subject in document.subjects %}
+            {#    accordion div starts#}
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="" id="headingTwo">
+                        <h2 class="mb-0">
+
+
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo{{ subject.name|cut:' ' }}"
+                                    aria-expanded="false" aria-controls="collapseTwo" onClick="moreInfo('2')">
+                                {{ subject.name }}
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo{{ subject.name|cut:' ' }}" class="collapse"
+                         aria-labelledby="headingTwo"
+                         data-parent="#accordionExample">
+                        <div class="card-body">
+
+{#                            loader start#}
+                            <div class="spinner-border" id="loadingbardiv" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+{#                            loader ends#}
+                            <ul class="list-inline" id="dynamicsubjectdiv">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {#    end of accordion div#}
+        {% endfor %}
     </div>
 
-    <div class="col-md-4">
-      <h3 class="my-3">Project Description</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-      <h3 class="my-3">Project Details</h3>
-      <ul>
-        <li>Lorem Ipsum</li>
-        <li>Dolor Sit Amet</li>
-        <li>Consectetur</li>
-        <li>Adipiscing Elit</li>
-      </ul>
+    <div class="row">
+
+        <div class="col-md-3 col-sm-6 mb-4">
+            <a href="#">
+                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+            <a href="#">
+                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+            <a href="#">
+                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+            <a href="#">
+                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+
     </div>
-
-  </div>
-  <!-- /.row -->
-
-  <!-- Related Projects Row -->
-  <h3 class="my-4">Related Projects</h3>
-
-  <div class="row">
-
-    <div class="col-md-3 col-sm-6 mb-4">
-      <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-          </a>
-    </div>
-
-    <div class="col-md-3 col-sm-6 mb-4">
-      <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-          </a>
-    </div>
-
-    <div class="col-md-3 col-sm-6 mb-4">
-      <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-          </a>
-    </div>
-
-    <div class="col-md-3 col-sm-6 mb-4">
-      <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-          </a>
-    </div>
-
-  </div>
-  <!-- /.row -->
+    <!-- /.row -->
 
 {% endblock %}
+<li>a</li>
 
+{% block js %}
+    <script>
+        function moreInfo(id) {  /* change 1 - added id parameter*/
+            if ($('#dynamicsubjectdiv li').length == 0) {
+                $.ajax({
+                    url: "http://openlibrary.org/search.json?q=romance", /* change 2 - added the id parameter to the api call */
+                    dataType: "json",
+                    beforeSend: function () {
+                        // Show image container
+                        $("#loadingbardiv").show();
+                    },
+                    success: function (data) {
+                        $("#dynamicsubjectdiv").append(`
+                <li>a</li>
+                <li>b</li>
+            `);
+                    },
+                    complete: function (data) {
+                        // Hide image container
+                        $("#loadingbardiv").hide();
+                    }
+                });
+            }
+
+
+        }
+    </script>
+
+{% endblock %}
 
 
 
