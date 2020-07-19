@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <a href="{% url 'library:details' 'abc' %}"><h5 class="card-title">{{ document.title }}</h5></a>
+                            <a href="{% url 'library:details' document.seed.0|to_and %}"><h5 class="card-title">{{ document.title }}</h5></a>
                             {{ document.seed.0 }}
                             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
                                 additional content. This content is a little bit longer.</p>

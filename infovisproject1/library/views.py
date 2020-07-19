@@ -73,11 +73,11 @@ def search_result(request):
     return render(request, template, context)
 def document_details(request, olid):
     template = 'document_details_page_basic.html'
-    document_isbn = request.GET['isbn']
-    query = 'https://openlibrary.org/api/books?bibkeys=ISBN:' + document_isbn + '&jscmd=data&format=json'
+    document_olid = olid
+    query = 'https://openlibrary.org/api/books?bibkeys=OLID:' + document_olid + '&jscmd=data&format=json'
     r = requests.get(query)
     response = r.json()
-    document = response['ISBN:'+document_isbn]
+    document = response['OLID:'+document_olid]
     context = {
         "document": document
     }
