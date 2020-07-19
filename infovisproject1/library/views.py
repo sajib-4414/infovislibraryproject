@@ -71,3 +71,14 @@ def search_result(request):
         # "arts_books"    : arts_books
     }
     return render(request, template, context)
+def document_details(request, olid):
+    template = 'document_details_page_basic.html'
+    document_isbn = request.GET['isbn']
+    query = 'https://openlibrary.org/api/books?bibkeys=ISBN:' + document_isbn + '&jscmd=data&format=json'
+    r = requests.get(query)
+    response = r.json()
+    document = response['ISBN:'+document_isbn]
+    context = {
+        "document": document
+    }
+    return render(request, template, context)
