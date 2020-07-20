@@ -54,7 +54,7 @@
 
         {% for subject in document.subjects %}
             {#    accordion div starts#}
-            <div class="accordion" id="accordionExample">
+            <div class="accordion" id="accordionExample{{ subject.name|cut:' '|remove_special_characters }}">
                 <div class="card">
                     <div class="" id="headingTwo">
                         <h2 class="mb-0" id="subjecttitle{{ subject.name|cut:' '|remove_special_characters }}">
@@ -73,7 +73,7 @@
                     </div>
                     <div id="collapseTwo{{ subject.name|cut:' '|remove_special_characters }}" class="collapse"
                          aria-labelledby="headingTwo"
-                         data-parent="#accordionExample">
+                         data-parent="#accordionExample{{ subject.name|cut:' '|remove_special_characters }}">
                         <div class="card-body">
 
                             {#                            loader start#}
