@@ -57,7 +57,7 @@
             <div class="accordion" id="accordionExample">
                 <div class="card">
                     <div class="" id="headingTwo">
-                        <h2 class="mb-0">
+                        <h2 class="mb-0" id="subjecttitle">
 
 
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
@@ -66,7 +66,10 @@
                                     onClick="moreInfo('{{ subject.name|replace_space_with_plus }}')">
                                 {{ subject.name }}
                             </button>
+
                         </h2>
+
+
                     </div>
                     <div id="collapseTwo{{ subject.name|cut:' ' }}" class="collapse"
                          aria-labelledby="headingTwo"
@@ -122,7 +125,6 @@
 {% block js %}
     <script>
         function moreInfo(subject) {  /* change 1 - added id parameter*/
-            alert($("#dynamicsubjectdiv").children().length)
             if (!$("#dynamicsubjectdiv").children().length) {
                 $.ajax({
                     url: "http://openlibrary.org/search.json?q=" + subject + "&limit=9", /* change 2 - added the id parameter to the api call */
@@ -148,12 +150,16 @@
                     </div>
                     </div>`);
                         }
+                        $("#subjecttitle").append(`<a href="#" class="previous round" id="prevb">&#8249;</a>
+                        <a href="#" class="next round" id="nextb">&#8250;</a>`)
                         $('#dynamicsubjectdiv').slick({
                             infinite: false,
                             slidesToShow: 4,
                             slidesToScroll: 3,
                             arrows: true,
-                            dots: true
+                            dots: true,
+                            prevArrow: $('#prevb'),
+                            nextArrow: $('#nextb'),
                         });
 
                     },
