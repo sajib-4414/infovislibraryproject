@@ -70,14 +70,12 @@
                          data-parent="#accordionExample">
                         <div class="card-body">
 
-{#                            loader start#}
+                            {#                            loader start#}
                             <div class="spinner-border" id="loadingbardiv" role="status">
                                 <span class="sr-only">Loading...</span>
                             </div>
-{#                            loader ends#}
-                            <ul class="list-inline" id="dynamicsubjectdiv">
-
-                            </ul>
+                            {#                            loader ends#}
+                            <div class="row text-center my-slider-class" id="dynamicsubjectdiv"></div>
                         </div>
                     </div>
                 </div>
@@ -121,7 +119,7 @@
 {% block js %}
     <script>
         function moreInfo(id) {  /* change 1 - added id parameter*/
-            if ($('#dynamicsubjectdiv li').length == 0) {
+            if (!$("#dynamicsubjectdiv").children().length) {
                 $.ajax({
                     url: "http://openlibrary.org/search.json?q=romance", /* change 2 - added the id parameter to the api call */
                     dataType: "json",
@@ -130,9 +128,22 @@
                         $("#loadingbardiv").show();
                     },
                     success: function (data) {
+                        $("#dynamicsubjectdiv").empty();
                         $("#dynamicsubjectdiv").append(`
-                <li>a</li>
-                <li>b</li>
+                <div class="col-lg-3 col-md-6 mb-4">
+                                        <div class="card h-100">
+                                            <img class="card-img-top"
+                                                 src="http://covers.openlibrary.org/b/id/123-M.jpg"
+                                                 alt="cannot load image">
+                                            <div class="card-body p-3">
+                                                <h4 class="card-title">title</h4>
+                                                <p class="card-text">Author: author name</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a href="#" class="btn btn-primary">Find Out More!</a>
+                                            </div>
+                                        </div>
+                                    </div>
             `);
                     },
                     complete: function (data) {
