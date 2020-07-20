@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load range %}
 
 {% block title %}
     <title>Home</title>
@@ -60,7 +61,7 @@
 
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                     data-target="#collapseTwo{{ subject.name|cut:' ' }}"
-                                    aria-expanded="false" aria-controls="collapseTwo" onClick="moreInfo('2')">
+                                    aria-expanded="false" aria-controls="collapseTwo" onClick="moreInfo('{{ subject.name|replace_space_with_plus }}')">
                                 {{ subject.name }}
                             </button>
                         </h2>
@@ -118,10 +119,10 @@
 
 {% block js %}
     <script>
-        function moreInfo(id) {  /* change 1 - added id parameter*/
+        function moreInfo(subject) {  /* change 1 - added id parameter*/
             if (!$("#dynamicsubjectdiv").children().length) {
                 $.ajax({
-                    url: "http://openlibrary.org/search.json?q=romance", /* change 2 - added the id parameter to the api call */
+                    url: "http://openlibrary.org/search.json?q="+subject+"?limit=9", /* change 2 - added the id parameter to the api call */
                     dataType: "json",
                     beforeSend: function () {
                         // Show image container
