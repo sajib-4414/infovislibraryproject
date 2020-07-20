@@ -1,4 +1,5 @@
 from django import template
+import re
 
 register = template.Library()
 
@@ -13,3 +14,8 @@ def to_and(value):
 @register.filter
 def replace_space_with_plus(value):
     return value.replace(" ","+")
+
+@register.filter
+def remove_special_characters(value):
+    plain_value = re.sub('[!@#$&/]', '', value)
+    return plain_value
