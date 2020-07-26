@@ -13,3 +13,9 @@
     height: 1.2em;
     white-space: nowrap;
 }
+
+.fa-tablet{
+    color:transparent;
+    -webkit-text-stroke-width: 2px;
+   -webkit-text-stroke-color: black;
+}
