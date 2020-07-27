@@ -33,7 +33,7 @@
                         {% endif %}
                     </div>
                     <div class="col-md-8">
-                        <div class="card-body">
+                        <div class="card-body" id="card_body_id">
                             <a href="{% url 'library:details' document.seed.0|to_and %}"><h5 class="card-title">{{ document.title }}</h5></a>
                             {{ document.seed.0 }}
                             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
@@ -110,4 +110,22 @@
         </ul>
     </nav>
 
+{% endblock %}
+{% block js %}
+    <script>
+
+    document.querySelector('#card_body_id a').addEventListener('click', function (event) {
+  // Do something before following the link
+
+  // Get url from the target element (<a>) href attribute
+  var url = event.target.href;
+  console.log("hi")
+
+  // Open the url in the current window. Set to "_blank" instead of "_self" to open in a new window.
+  {#window.open(url, '_self');#}
+
+  // Prevent default action (e.g. following the link)
+  {#event.preventDefault();#}
+});
+    </script>
 {% endblock %}
