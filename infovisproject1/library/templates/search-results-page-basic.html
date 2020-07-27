@@ -118,14 +118,19 @@
   // Do something before following the link
 
   // Get url from the target element (<a>) href attribute
-  var url = event.target.href;
-  console.log("hi")
+  {#var url = event.target.href;#}
+  {#console.log(event)#}
+        var anchor = event.target.closest("a");     // Find closest Anchor (or self)
+  console.log( anchor.getAttribute('href'));
+  main_url = anchor.getAttribute('href')
+  element_id = main_url.substring(18, main_url.length-1);
+  console.log("The id is "+element_id)
 
   // Open the url in the current window. Set to "_blank" instead of "_self" to open in a new window.
   {#window.open(url, '_self');#}
 
   // Prevent default action (e.g. following the link)
-  {#event.preventDefault();#}
+  event.preventDefault();
 });
     </script>
 {% endblock %}
