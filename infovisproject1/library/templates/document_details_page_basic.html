@@ -27,7 +27,8 @@
 
         <div class="col-md-8">
             <h3 class="my-3">{{ document.title }}</h3>
-        <div class="border pl-1" style="max-width: 100px"><i class="fa fa-tablet" aria-hidden="true"></i> Ebook</div>
+            <div class="border pl-1" style="max-width: 100px"><i class="fa fa-tablet" aria-hidden="true"></i> Ebook
+            </div>
             <b>Published: </b><span> {{ document.publish_date }}</span>
             <br>
             <b>Authors: </b>
@@ -78,11 +79,13 @@
                         <div class="card-body">
 
                             {#                            loader start#}
-                            <div class="spinner-border" id="loadingbardiv{{ subject.name|cut:' '|remove_special_characters }}" role="status">
+                            <div class="spinner-border"
+                                 id="loadingbardiv{{ subject.name|cut:' '|remove_special_characters }}" role="status">
                                 <span class="sr-only">Loading...</span>
                             </div>
                             {#                            loader ends#}
-                            <div class="row text-center my-slider-class" id="dynamicsubjectdiv{{ subject.name|cut:' '|remove_special_characters }}"></div>
+                            <div class="row text-center my-slider-class"
+                                 id="dynamicsubjectdiv{{ subject.name|cut:' '|remove_special_characters }}"></div>
                         </div>
                     </div>
                 </div>
@@ -126,14 +129,14 @@
 {% block js %}
     <script>
         function moreInfo(subject, div_suffix) {  /* change 1 - added id parameter*/
-            div_id= "#dynamicsubjectdiv"+ div_suffix
+            div_id = "#dynamicsubjectdiv" + div_suffix
             if (!$(div_id).children().length) {
                 $.ajax({
                     url: "http://openlibrary.org/search.json?q=" + subject + "&limit=9", /* change 2 - added the id parameter to the api call */
                     dataType: "json",
                     beforeSend: function () {
                         // Show image container
-                        $("#loadingbardiv"+div_suffix).show();
+                        $("#loadingbardiv" + div_suffix).show();
                     },
                     success: function (data) {
                         $(div_id).empty();
@@ -141,12 +144,12 @@
                         for (i = 0; i < documents.length; i++) {
 
                             image_url = "http://covers.openlibrary.org/b/id/" + documents[i]['cover_i'] + "-M.jpg"
-                            if(!documents[i]['cover_i']){
+                            if (!documents[i]['cover_i']) {
                                 image_url = "{% static 'images/image-not-found-1024x576.png' %}";
                             }
                             $(div_id).append(`<div class="col-lg-3 col-md-6 mb-4">
                     <div class="card h-100">
-                        <img class="card-img-top" src= "`+ image_url +  `"alt="cannot load image">
+                        <img class="card-img-top" src= "` + image_url + `"alt="cannot load image">
                         <div class="card-body p-3">
                             <h4 class="card-title">` + documents[i]["title"] + `</h4>
                             <p class="card-text">Author: def</p>
@@ -157,22 +160,22 @@
                     </div>
                     </div>`);
                         }
-                        $("#subjecttitle"+div_suffix).append(`<a href="#" class="previous round" id="prevb`+div_suffix+`">&#8249;</a>
-                        <a href="#" class="next round" id="nextb`+div_suffix+`">&#8250;</a>`)
+                        $("#subjecttitle" + div_suffix).append(`<a href="#" class="previous round" id="prevb` + div_suffix + `">&#8249;</a>
+                        <a href="#" class="next round" id="nextb` + div_suffix + `">&#8250;</a>`)
                         $(div_id).slick({
                             infinite: false,
                             slidesToShow: 4,
                             slidesToScroll: 3,
                             arrows: true,
                             dots: true,
-                            prevArrow: $('#prevb'+div_suffix),
-                            nextArrow: $('#nextb'+div_suffix),
+                            prevArrow: $('#prevb' + div_suffix),
+                            nextArrow: $('#nextb' + div_suffix),
                         });
 
                     },
                     complete: function (data) {
                         // Hide image container
-                        $("#loadingbardiv"+div_suffix).hide();
+                        $("#loadingbardiv" + div_suffix).hide();
                     }
                 });
             }
@@ -182,9 +185,20 @@
     </script>
 
     <script>
-
-
+        current_url = window.location.href
+        var array = current_url.split("/");
+        element_id = array[array.length - 2]
+        desired_document = JSON.parse(localStorage.getItem(element_id));
+        console.log(desired_document)
+        window.onbeforeunload = function () {
+            {#console.log('event');#}
+            localStorage.removeItem(element_id)
+            //alert("Hi you are closing")
+            return false; //here also can be string, that will be shown to the user
+        }
     </script>
+
+
 
 
 

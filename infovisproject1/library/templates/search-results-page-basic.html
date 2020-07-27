@@ -132,6 +132,7 @@
             {#var url = event.target.href;#}
             {#console.log(event)#}
             {#event.preventDefault();#}
+            {#alert("Hi")#}
             var anchor = event.target.closest("a");     // Find closest Anchor (or self)
             console.log(anchor.getAttribute('href'));
             main_url = anchor.getAttribute('href')
@@ -151,7 +152,7 @@
                 }
             }
             console.log(" the index is " + i)
-            localStorage.setItem(element_id, desired_document);
+            localStorage.setItem(element_id, JSON.stringify(desired_document));
 
             // Open the url in the current window. Set to "_blank" instead of "_self" to open in a new window.
             {#window.open(url, '_self');#}
