@@ -7,10 +7,10 @@ import copy
 
 
 def get_books_of_subjects(subject):
-    response = requests.get('http://openlibrary.org/subjects/' + subject + '.json?limit=9')
+    response = requests.get('http://openlibrary.org/search.json?q=' + subject + '&limit=9')
     if response.status_code == 200:
         json_response = response.json()
-        books = json_response['works']
+        books = json_response['docs']
         return books
     return []
 
@@ -26,6 +26,7 @@ def index(request):
         "thriller_books": thriller_books,
         "arts_books"    : arts_books
     }
+    # print(romance_books)
     return render(request, template, context)
     # return HttpResponse("Hello, world. You're at the polls index.")
 
@@ -73,12 +74,12 @@ def search_result(request):
     return render(request, template, context)
 def document_details(request, olid):
     template = 'document_details_page_basic.html'
-    document_olid = olid
-    query = 'https://openlibrary.org/api/books?bibkeys=OLID:' + document_olid + '&jscmd=data&format=json'
-    r = requests.get(query)
-    response = r.json()
-    document = response['OLID:'+document_olid]
+    # document_olid = olid
+    # query = 'https://openlibrary.org/api/books?bibkeys=OLID:' + document_olid + '&jscmd=data&format=json'
+    # r = requests.get(query)
+    # response = r.json()
+    # document = response['OLID:'+document_olid]
     context = {
-        "document": document
+
     }
     return render(request, template, context)

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load range %}
 
 {% block title %}
     <title>Home</title>
@@ -41,10 +42,16 @@
 
                     <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card h-100">
-                        <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_id}}-M.jpg" alt="cannot load image">
+                        {% if book.cover_i %}
+                            <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_i}}-M.jpg" alt="cannot load image">
+                        {% else %}
+                            <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_i}}-M.jpg" alt="cannot load image">
+                        {% endif %}
+
                         <div class="card-body p-3">
-                            <h4 class="card-title">{{ book.title }}</h4>
-                            <p class="card-text">Author: "{{ book.authors.first.name }}"</p>
+                            <a class="url-event-thriller" href="{% url 'library:details' book.seed.0|to_and %}"><h4
+                                    class="card-title">{{ book.title }}</h4></a>
+{#                            <p class="card-text">Author: "{{ book.authors.first.name }}"</p>#}
                         </div>
                         <div class="card-footer">
 {#                            <a href="#" class="btn btn-primary">Find Out More!</a>#}
@@ -85,10 +92,14 @@
 
                     <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card h-100">
-                        <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_id}}-M.jpg" alt="cannot load image">
+                        {% if book.cover_i %}
+                            <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_i}}-M.jpg" alt="cannot load image">
+                        {% else %}
+                            <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_i}}-M.jpg" alt="cannot load image">
+                        {% endif %}
                         <div class="card-body p-3">
                             <h4 class="card-title">{{ book.title }}</h4>
-                            <p class="card-text">Author: "{{ book.authors.first.name }}"</p>
+{#                            <p class="card-text">Author: "{{ book.authors.first.name }}"</p>#}
                         </div>
                         <div class="card-footer">
                             <a href="#" class="btn btn-primary">Find Out More!</a>
@@ -122,10 +133,14 @@
 
                     <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card h-100">
-                        <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_id}}-M.jpg" alt="cannot load image">
+                        {% if book.cover_i %}
+                            <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_i}}-M.jpg" alt="cannot load image">
+                        {% else %}
+                            <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_i}}-M.jpg" alt="cannot load image">
+                        {% endif %}
                         <div class="card-body p-3">
                             <h4 class="card-title">{{ book.title }}</h4>
-                            <p class="card-text">Author: "{{ book.authors.first.name }}"</p>
+{#                            <p class="card-text">Author: "{{ book.authors.first.name }}"</p>#}
                         </div>
                         <div class="card-footer">
                             <a href="#" class="btn btn-primary">Find Out More!</a>
@@ -164,7 +179,51 @@
             });
         });
     </script>
+
+    {{ thriller_books|json_script:"classdata" }}
+    <script>
+
+        var elems = document.getElementsByClassName('url-event-thriller');
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].addEventListener('click', function (event) {
+                listener(event)
+            }, false);
+        }
+
+        function listener(event) {
+// Do something before following the link
+
+            // Get url from the target element (<a>) href attribute
+            {#var url = event.target.href;#}
+            {#console.log(event)#}
+            {#event.preventDefault();#}
+            {#alert("Hi")#}
+            var anchor = event.target.closest("a");     // Find closest Anchor (or self)
+            console.log(anchor.getAttribute('href'));
+            main_url = anchor.getAttribute('href')
+            element_id = main_url.substring(18, main_url.length - 1);
+            console.log("The id is " + element_id)
+            const value = JSON.parse(document.getElementById('classdata').textContent);
+            console.log(value)
+            var i;
+            var desired_document;
+            for (i = 0; i < value.length; i++) {
+                var item = value[i];
+                console.log(item.seed[0]);
+                let newStr = item.seed[0].replace("/books/", "");
+                if (newStr == element_id) {
+                    desired_document = item
+                    break
+                }
+            }
+            console.log(" the index is " + i)
+            localStorage.setItem(element_id, JSON.stringify(desired_document));
+
+            // Open the url in the current window. Set to "_blank" instead of "_self" to open in a new window.
+            {#window.open(url, '_self');#}
+
+            // Prevent default action (e.g. following the link)
+        }
+    </script>
 {% endblock %}
-
-
 

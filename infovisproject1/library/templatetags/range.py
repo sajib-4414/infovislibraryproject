@@ -12,6 +12,10 @@ def to_and(value):
     return value.replace("/books/","")
 
 @register.filter
+def works_to_id(value):
+    return value.replace("/works/","")
+
+@register.filter
 def replace_space_with_plus(value):
     return value.replace(" ","+")
 

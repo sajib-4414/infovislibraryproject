@@ -75,7 +75,7 @@
 </div>
 
     <!-- Related Projects Row -->
-    <h3 class="my-4">Explore relevant readings by all subjects of this document</h3>
+    <h3 class="my-4" id="explore_relevant_subjects_id">Explore relevant readings by all subjects of this document</h3>
     <div id="subjects_appending_div_id">
 
 {#        {% for subject in document.subjects %}#}
@@ -213,8 +213,18 @@
         var array = current_url.split("/");
         element_id = array[array.length - 2]
         desired_document = JSON.parse(localStorage.getItem(element_id));
+        {#if (element_id.charAt(element_id.length-1) == 'W'){#}
+        {#    authors = desired_document.authors#}
+        //
         {#console.log(desired_document)#}
-        authors = desired_document.author_name
+        {#if (element_id.charAt(element_id.length-1) == 'W'){#}
+        {#    authors = desired_document.authors#}
+        //
+        {#else{#}
+            authors = desired_document.author_name
+        //}
+
+
         for(var i=0;i<authors.length;i++){
             $("ul#author_names_list_id").append('<li>'+authors[i]+'</li>');
         }
@@ -268,6 +278,9 @@
                     '                </div>\n' +
                     '            </div>')
             }
+        }
+        else{
+            document.getElementById("explore_relevant_subjects_id").style.display = "none";
         }
 
 
