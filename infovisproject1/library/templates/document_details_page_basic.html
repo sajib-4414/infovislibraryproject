@@ -26,7 +26,7 @@
         </div>
 
         <div class="col-md-8">
-            <h3 class="my-3">{{ document.title }}</h3>
+            <h3 class="my-3" id="title_id"></h3>
             <div class="border pl-1" style="max-width: 100px"><i class="fa fa-tablet" aria-hidden="true"></i> Ebook
             </div>
             <b>Latest Edition: </b> <span id="latest_edition_id"></span>
@@ -228,11 +228,20 @@
         for(var i=0;i<authors.length;i++){
             $("ul#author_names_list_id").append('<li>'+authors[i]+'</li>');
         }
-        document.getElementById("latest_edition_id").innerHTML = desired_document.publish_year[desired_document.publish_year.length-1]
-        document.getElementById("first_publish_year_id").innerHTML = desired_document.publish_year[0]
+        document.getElementById("title_id").innerHTML = desired_document.title
+        if ("publish_year" in desired_document){
+            document.getElementById("latest_edition_id").innerHTML = desired_document.publish_year[desired_document.publish_year.length-1]
+            document.getElementById("first_publish_year_id").innerHTML = desired_document.publish_year[0]
+        }
+        else{
+            document.getElementById("latest_edition_id").innerHTML = "Not available"
+            document.getElementById("first_publish_year_id").innerHTML = "Not available"
+        }
+
+
         document.getElementById("edition_count_id").innerHTML = desired_document.edition_count
         {#console.log(desired_document)#}
-        if ("subject" in desired_document){
+        if ("subject" in desired_document ){
             {#console.log("Hello inside if")#}
             const subjects = desired_document.subject;
             console.log(subjects)
