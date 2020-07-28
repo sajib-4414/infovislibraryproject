@@ -76,46 +76,46 @@
 
     <!-- Related Projects Row -->
     <h3 class="my-4">Explore relevant readings by all subjects of this document</h3>
-    <div>
+    <div id="subjects_appending_div_id">
 
-        {% for subject in document.subjects %}
+{#        {% for subject in document.subjects %}#}
             {#    accordion div starts#}
-            <div class="accordion" id="accordionExample{{ subject.name|cut:' '|remove_special_characters }}">
-                <div class="card">
-                    <div class="" id="headingTwo">
-                        <h2 class="mb-0" id="subjecttitle{{ subject.name|cut:' '|remove_special_characters }}">
-
-
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                    data-target="#collapseTwo{{ subject.name|cut:' '|remove_special_characters }}"
-                                    aria-expanded="false" aria-controls="collapseTwo"
-                                    onClick="moreInfo('{{ subject.name|replace_space_with_plus }}','{{ subject.name|cut:' '|remove_special_characters }}')">
-                                {{ subject.name }}
-                            </button>
-
-                        </h2>
-
-
-                    </div>
-                    <div id="collapseTwo{{ subject.name|cut:' '|remove_special_characters }}" class="collapse"
-                         aria-labelledby="headingTwo"
-                         data-parent="#accordionExample{{ subject.name|cut:' '|remove_special_characters }}">
-                        <div class="card-body">
-
+{#            <div class="accordion" id="accordionExample{{ subject.name|cut:' '|remove_special_characters }}">#}
+{#                <div class="card">#}
+{#                    <div class="" id="headingTwo">#}
+{#                        <h2 class="mb-0" id="subjecttitle{{ subject.name|cut:' '|remove_special_characters }}">#}
+{##}
+{##}
+{#                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"#}
+{#                                    data-target="#collapseTwo{{ subject.name|cut:' '|remove_special_characters }}"#}
+{#                                    aria-expanded="false" aria-controls="collapseTwo"#}
+{#                                    onClick="moreInfo('{{ subject.name|replace_space_with_plus }}','{{ subject.name|cut:' '|remove_special_characters }}')">#}
+{#                                {{ subject.name }}#}
+{#                            </button>#}
+{##}
+{#                        </h2>#}
+{##}
+{##}
+{#                    </div>#}
+{#                    <div id="collapseTwo{{ subject.name|cut:' '|remove_special_characters }}" class="collapse"#}
+{#                         aria-labelledby="headingTwo"#}
+{#                         data-parent="#accordionExample{{ subject.name|cut:' '|remove_special_characters }}">#}
+{#                        <div class="card-body">#}
+{##}
                             {#                            loader start#}
-                            <div class="spinner-border"
-                                 id="loadingbardiv{{ subject.name|cut:' '|remove_special_characters }}" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
+{#                            <div class="spinner-border"#}
+{#                                 id="loadingbardiv{{ subject.name|cut:' '|remove_special_characters }}" role="status">#}
+{#                                <span class="sr-only">Loading...</span>#}
+{#                            </div>#}
                             {#                            loader ends#}
-                            <div class="row text-center my-slider-class"
-                                 id="dynamicsubjectdiv{{ subject.name|cut:' '|remove_special_characters }}"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{#                            <div class="row text-center my-slider-class"#}
+{#                                 id="dynamicsubjectdiv{{ subject.name|cut:' '|remove_special_characters }}"></div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
             {#    end of accordion div#}
-        {% endfor %}
+{#        {% endfor %}#}
     </div>
 
     <div class="row">
@@ -221,10 +221,58 @@
         document.getElementById("latest_edition_id").innerHTML = desired_document.publish_year[desired_document.publish_year.length-1]
         document.getElementById("first_publish_year_id").innerHTML = desired_document.publish_year[0]
         document.getElementById("edition_count_id").innerHTML = desired_document.edition_count
+        {#console.log(desired_document)#}
+        if ("subject" in desired_document){
+            {#console.log("Hello inside if")#}
+            const subjects = desired_document.subject;
+            console.log(subjects)
+            for(var i=0;i<subjects.length;i++){
+                console.log("Hello printing")
+                subject_name = subjects[i]
+                subject_name = subject_name.replace(/[^\w]/, '')
+                subject_name_truncated = subject_name.replace(/[^\w]/, '').replace(/\s/g, '')
+                console.log(subject_name_truncated)
+                subject_name_plus = subject_name.replace(/\s+/g, '+');
+                $('#subjects_appending_div_id').append('<div class="accordion" id="accordionExample'+subject_name_truncated+'">\n' +
+                    '                <div class="card">\n' +
+                    '                    <div class="" id="headingTwo">\n' +
+                    '                        <h2 class="mb-0" id="subjecttitle'+subject_name_truncated+'">\n' +
+                    '\n' +
+                    '\n' +
+                    '                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"\n' +
+                    '                                    data-target="#collapseTwo'+subject_name_truncated+'"\n' +
+                    '                                    aria-expanded="false" aria-controls="collapseTwo"\n' +
+                    '                                    onClick="moreInfo('+'\''+subject_name_plus+'\',\''+ subject_name_truncated+ '\')">'+subject_name +
+                    '                                \n' +
+                    '                            </button>\n' +
+                    '\n' +
+                    '                        </h2>\n' +
+                    '\n' +
+                    '\n' +
+                    '                    </div>\n' +
+                    '                    <div id="collapseTwo'+ subject_name_truncated+ '" class="collapse"\n' +
+                    '                         aria-labelledby="headingTwo"\n' +
+                    '                         data-parent="#accordionExample'+ subject_name_truncated+ '">\n' +
+                    '                        <div class="card-body">\n' +
+                    '\n' +
+                    '                            {#                            loader start#}\n' +
+                    '                            <div class="spinner-border"\n' +
+                    '                                 id="loadingbardiv'+ subject_name_truncated+ '" role="status">\n' +
+                    '                                <span class="sr-only">Loading...</span>\n' +
+                    '                            </div>\n' +
+                    '                            {#                            loader ends#}\n' +
+                    '                            <div class="row text-center my-slider-class"\n' +
+                    '                                 id="dynamicsubjectdiv'+subject_name_truncated+ '"></div>\n' +
+                    '                        </div>\n' +
+                    '                    </div>\n' +
+                    '                </div>\n' +
+                    '            </div>')
+            }
+        }
 
 
         window.onbeforeunload = function () {
-            {#console.log('event');#}
+            console.log('event');
             localStorage.removeItem(element_id)
             //alert("Hi you are closing")
             return; //here also can be string, that will be shown to the user
