@@ -41,48 +41,48 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="#">Link</a>#}
+{#                </li>#}
+{#                <li class="nav-item dropdown">#}
+{#                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"#}
+{#                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                        Dropdown#}
+{#                    </a>#}
+{#                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+{#                        <a class="dropdown-item" href="#">Action</a>#}
+{#                        <a class="dropdown-item" href="#">Another action</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="dropdown-item" href="#">Something else here</a>#}
+{#                    </div>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link disabled" href="#">Disabled</a>#}
+{#                </li>#}
             </ul>
             <form class="form-inline my-2 my-lg-0" action="{% url 'library:search_result' %}" method="get">
 
                 {#      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="min-width: 400px">#}
                 <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-light dropdown-toggle border-right" type="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false" id="AdvancedSearch"><span class="selection">All</span>
-                        </button>
-                        <div class="dropdown-menu" id="saerch-dropdown-id">
-                            <a class="dropdown-item" href="#">All</a>
-                            <div role="separator" class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Keywords</a>
-                            <a class="dropdown-item" href="#">Subjects</a>
-                            {#                            <a class="dropdown-item" href="#">Something else here</a>#}
-                            {#                            <div role="separator" class="dropdown-divider"></div>#}
-                            {#                            <a class="dropdown-item" href="#">Separated link</a>#}
-                        </div>
-                    </div>
+{#                    <div class="input-group-prepend">#}
+{#                        <button class="btn btn-light dropdown-toggle border-right" type="button" data-toggle="dropdown"#}
+{#                                aria-haspopup="true" aria-expanded="false" id="AdvancedSearch"><span class="selection">All</span>#}
+{#                        </button>#}
+{#                        <div class="dropdown-menu" id="saerch-dropdown-id">#}
+{#                            <a class="dropdown-item" href="#">All</a>#}
+{#                            <div role="separator" class="dropdown-divider"></div>#}
+{#                            <a class="dropdown-item" href="#">Keywords</a>#}
+{#                            <a class="dropdown-item" href="#">Subjects</a>#}
+{#                                                        <a class="dropdown-item" href="#">Something else here</a>#}
+{#                                                        <div role="separator" class="dropdown-divider"></div>#}
+{#                                                        <a class="dropdown-item" href="#">Separated link</a>#}
+{#                        </div>#}
+{#                    </div>#}
                     {% if searched_keywords %}
                         <input type="text" name="keywords" class="form-control" id="searchfield"
                                aria-label="Text input with dropdown button" value="{{ searched_keywords }}">
                     {% else %}
-                        <input type="text" name="keywords" class="form-control" id="searchfield"
+                        <input type="text" name="keywords" class="form-control" id="searchfield" placeholder="Enter your query here"
                                aria-label="Text input with dropdown button">
                     {% endif %}
 
