@@ -98,7 +98,8 @@
                             <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_i}}-M.jpg" alt="cannot load image">
                         {% endif %}
                         <div class="card-body p-3">
-                            <h4 class="card-title">{{ book.title }}</h4>
+                            <a class="url-event-romance" href="{% url 'library:details' book.seed.0|to_and %}"><h4
+                                    class="card-title">{{ book.title }}</h4></a>
 {#                            <p class="card-text">Author: "{{ book.authors.first.name }}"</p>#}
                         </div>
                         <div class="card-footer">
@@ -181,16 +182,25 @@
     </script>
 
     {{ thriller_books|json_script:"classdata" }}
+    {{ romance_books|json_script:"classdata_romance" }}
     <script>
 
+        const thriller_docs = JSON.parse(document.getElementById('classdata').textContent);
+        const romance_docs = JSON.parse(document.getElementById('classdata_romance').textContent);
         var elems = document.getElementsByClassName('url-event-thriller');
+        var elems_romance = document.getElementsByClassName('url-event-romance');
         for (var i = 0; i < elems.length; i++) {
             elems[i].addEventListener('click', function (event) {
-                listener(event)
+                listener(event, thriller_docs)
+            }, false);
+        }
+        for (var i = 0; i < elems_romance.length; i++) {
+            elems_romance[i].addEventListener('click', function (event) {
+                listener(event, romance_docs)
             }, false);
         }
 
-        function listener(event) {
+        function listener(event, value) {
 // Do something before following the link
 
             // Get url from the target element (<a>) href attribute
@@ -203,7 +213,7 @@
             main_url = anchor.getAttribute('href')
             element_id = main_url.substring(18, main_url.length - 1);
             console.log("The id is " + element_id)
-            const value = JSON.parse(document.getElementById('classdata').textContent);
+
             console.log(value)
             var i;
             var desired_document;
