@@ -140,7 +140,8 @@
                             <img class="card-img-top" src="http://covers.openlibrary.org/b/id/{{book.cover_i}}-M.jpg" alt="cannot load image">
                         {% endif %}
                         <div class="card-body p-3">
-                            <h4 class="card-title">{{ book.title }}</h4>
+                            <a class="url-event-arts" href="{% url 'library:details' book.seed.0|to_and %}"><h4
+                                    class="card-title">{{ book.title }}</h4></a>
 {#                            <p class="card-text">Author: "{{ book.authors.first.name }}"</p>#}
                         </div>
                         <div class="card-footer">
@@ -183,12 +184,15 @@
 
     {{ thriller_books|json_script:"classdata" }}
     {{ romance_books|json_script:"classdata_romance" }}
+    {{ arts_books|json_script:"classdata_arts" }}
     <script>
 
         const thriller_docs = JSON.parse(document.getElementById('classdata').textContent);
         const romance_docs = JSON.parse(document.getElementById('classdata_romance').textContent);
+        const arts_docs = JSON.parse(document.getElementById('classdata_arts').textContent);
         var elems = document.getElementsByClassName('url-event-thriller');
         var elems_romance = document.getElementsByClassName('url-event-romance');
+        var elems_arts = document.getElementsByClassName('url-event-arts');
         for (var i = 0; i < elems.length; i++) {
             elems[i].addEventListener('click', function (event) {
                 listener(event, thriller_docs)
@@ -197,6 +201,11 @@
         for (var i = 0; i < elems_romance.length; i++) {
             elems_romance[i].addEventListener('click', function (event) {
                 listener(event, romance_docs)
+            }, false);
+        }
+        for (var i = 0; i < elems_arts.length; i++) {
+            elems_arts[i].addEventListener('click', function (event) {
+                listener(event, arts_docs)
             }, false);
         }
 
