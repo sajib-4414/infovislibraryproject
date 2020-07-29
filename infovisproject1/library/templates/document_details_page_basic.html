@@ -61,12 +61,17 @@
             <div class="card-header" id="headingTwo">
                 <h2 class="mb-0">
                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        This document is 64% match to your interests
+                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" onclick="fetch_subject_match_data()">
+                        See how this document subjects matches your interests
                     </button>
                 </h2>
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                      {#                            loader start#}
+                    <div class="spinner-border" id="subject_match_loading_div" role="status">
+                <span class="sr-only">Loading...</span>
+                   </div>
+            {#                            loader ends#}
                 <div class="card-body">
                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
                     wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
@@ -151,7 +156,10 @@
         </div>
 
     </div>
-    <!-- /.row -->
+{#    end of row#}
+    <form id="form_placeholder" action="/test-api-call/">
+    {% csrf_token %}
+    </form>
 
 {% endblock %}
 <li>a</li>
@@ -213,6 +221,46 @@
                     }
                 });
             }
+
+
+        }
+    </script>
+
+        <script>
+        //myform = document.getElementById("form_placeholder")
+        //csrf_token = token_element[0].value;
+        function fetch_subject_match_data() {  /* change 1 - added id parameter*/
+            current_url = window.location.href
+            var array = current_url.split("/");
+            element_id = array[array.length - 2]
+            desired_document = JSON.parse(localStorage.getItem(element_id));
+            payload = $("#form_placeholder").serialize()+'&'+$.param({ 'document_item': JSON.stringify(desired_document) })
+            //payload.document_item = JSON.stringify(desired_document)
+            {#div_id = "#dynamicsubjectdiv" + div_suffix#}
+            //if (!$(div_id).children().length) {
+                $.ajax({
+                    url: "/test-api-call/", /* change 2 - added the id parameter to the api call */
+                    dataType: "json",
+                    type: "POST",
+                    processData: false,
+                    data: payload,
+                    beforeSend: function () {
+                        // Show image container
+                        $("#subject_match_loading_div").show();
+                        {#console.log(csrf_token)#}
+                    },
+                    success: function (data) {
+                        console.log(data)
+                        {#$(div_id).empty();#}
+                        {#documents = data['docs']#}
+
+                    },
+                    complete: function (data) {
+                        // Hide image container
+                        $("#subject_match_loading_div").hide();
+                    }
+                });
+          //  }
 
 
         }

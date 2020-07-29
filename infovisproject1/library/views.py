@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core import serializers
 from django.http import JsonResponse
 import requests
+import json
 import copy
 # Create your views here.
 from library.models import Subjects
@@ -32,13 +34,20 @@ def index(request):
     # return HttpResponse("Hello, world. You're at the polls index.")
 
 def my_django_view(request):
-    a = ['romance']
-    result = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(a) + ')')
+    # for key in request.POST:
+    #     print(key)
+    # print(request.POST)
+    document = request.POST['document_item']
+    doc_json = json.loads(document)
+    subjects = doc_json['subject']
+    print(subjects)
+    a = ['romance','love']
+    result = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(subjects) + ')').order_by('-hit_count')
     resultstring = ""
     for subject in result:
         resultstring = resultstring+ subject.subject_text
-    print(type(result))
-    return HttpResponse(resultstring)
+    # print(type(result))
+    return JsonResponse(serializers.serialize('json', result), safe=False)
     # if request.method == 'GET':
     #     response = requests.get('http://openlibrary.org/subjects/romance.json?limit=5', params=request.GET)
     # # else:
