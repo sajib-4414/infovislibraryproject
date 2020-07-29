@@ -258,7 +258,7 @@
                 console.log("Hello printing")
                 subject_name = subjects[i]
                 subject_name = subject_name.replace(/[^\w]/, '')
-                subject_name_truncated = subject_name.replace(/[^\w]/, '').replace(/\s/g, '')
+                subject_name_truncated = subject_name.replace(/[^\w]/, '').replace(/\s/g, '').replace(/[()]/g,'')
                 console.log(subject_name_truncated)
                 subject_name_plus = subject_name.replace(/\s+/g, '+');
                 $('#subjects_appending_div_id').append('<div class="accordion" id="accordionExample' + subject_name_truncated + '">\n' +

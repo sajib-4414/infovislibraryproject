@@ -4,6 +4,7 @@ from django.http import JsonResponse
 import requests
 import copy
 # Create your views here.
+from library.models import Subjects
 
 
 def get_books_of_subjects(subject):
@@ -31,15 +32,22 @@ def index(request):
     # return HttpResponse("Hello, world. You're at the polls index.")
 
 def my_django_view(request):
-    if request.method == 'GET':
-        response = requests.get('http://openlibrary.org/subjects/romance.json?limit=5', params=request.GET)
-    # else:
-    #     r = requests.get('https://www.somedomain.com/some/url/save', params=request.GET)
-    if response.status_code == 200:
-        response2= response.json()
-        key= response2['key']
-        return HttpResponse(str(key))
-    return HttpResponse('Could not save data'+str(response.status_code))
+    a = ['romance']
+    result = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(a) + ')')
+    resultstring = ""
+    for subject in result:
+        resultstring = resultstring+ subject.subject_text
+    print(type(result))
+    return HttpResponse(resultstring)
+    # if request.method == 'GET':
+    #     response = requests.get('http://openlibrary.org/subjects/romance.json?limit=5', params=request.GET)
+    # # else:
+    # #     r = requests.get('https://www.somedomain.com/some/url/save', params=request.GET)
+    # if response.status_code == 200:
+    #     response2= response.json()
+    #     key= response2['key']
+    #     return HttpResponse(str(key))
+    # return HttpResponse('Could not save data'+str(response.status_code))
 
 def search_result(request):
     # post = Post.objects.filter(status='published')
