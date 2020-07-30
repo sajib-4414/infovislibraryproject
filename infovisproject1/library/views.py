@@ -106,15 +106,28 @@ def document_details(request, olid):
 def get_subject_match_data(request):
     document = request.POST['document_item']
     doc_json = json.loads(document)
-    subjects = doc_json['subject']
-    print(subjects)
-    a = ['romance', 'love']
-    results = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(subjects) + ')').order_by('-hit_count')
     context_data = []
-    for result in results:
-        # print("loop iteration")
-        data = {'name': result.subject_text, 'hits': result.hit_count}
-        context_data.append(data)
+    if 'subject' in doc_json and len(doc_json['subject']):
+        subjects = doc_json['subject']
+        print(subjects)
+        # a = ['romance', 'love']
+        results = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(subjects) + ')').order_by('-hit_count')
 
-    # print(type(result))
+        for result in results:
+            # print("loop iteration")
+            data = {'name': result.subject_text, 'hits': result.hit_count}
+            context_data.append(data)
+
+        #now updating existing results
+        for subject in subjects:
+            result_matches = Subjects.objects.filter(subject_text__iregex=r'('+subject+')')
+            if result_matches:
+                for match in result_matches:
+                    count = match.hit_count+1
+                    match.hit_count = count
+                    match.save()
+            else:
+                new_subject = Subjects(subject_text=subject)
+                new_subject.save()
+            # MyModel.objects.filter(pk=some_value).update(field1='some value')
     return JsonResponse(context_data, safe=False)
