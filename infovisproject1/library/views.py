@@ -42,12 +42,14 @@ def my_django_view(request):
     subjects = doc_json['subject']
     print(subjects)
     a = ['romance','love']
-    result = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(subjects) + ')').order_by('-hit_count')
-    resultstring = ""
-    for subject in result:
-        resultstring = resultstring+ subject.subject_text
+    results = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(subjects) + ')').order_by('-hit_count')
+    context_data = []
+    for result in results:
+        data = { 'name' : result.subject_text, 'hits': result.hit_count}
+        context_data.append(data)
+
     # print(type(result))
-    return JsonResponse(serializers.serialize('json', result), safe=False)
+    return JsonResponse(data, safe=False)
     # if request.method == 'GET':
     #     response = requests.get('http://openlibrary.org/subjects/romance.json?limit=5', params=request.GET)
     # # else:
