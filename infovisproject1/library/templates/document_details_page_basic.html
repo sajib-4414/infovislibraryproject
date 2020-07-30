@@ -8,6 +8,7 @@
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/detail-page-style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/barchart.css' %}"/>
 
 {% endblock %}
 
@@ -61,25 +62,21 @@
             <div class="card-header" id="headingTwo">
                 <h2 class="mb-0">
                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" onclick="fetch_subject_match_data()">
+                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                            onclick="fetch_subject_match_data()">
                         See how this document subjects matches your interests
                     </button>
                 </h2>
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                      {#                            loader start#}
-                    <div class="spinner-border" id="subject_match_loading_div" role="status">
-                <span class="sr-only">Loading...</span>
-                   </div>
-            {#                            loader ends#}
+                {#                            loader start#}
+                <div class="spinner-border" id="subject_match_loading_div" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                {#                            loader ends#}
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                    eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                    assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                    sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                    labore sustainable VHS.
+                    <svg width="1000" height="500"></svg>
+
                 </div>
             </div>
         </div>
@@ -156,15 +153,17 @@
         </div>
 
     </div>
-{#    end of row#}
+    {#    end of row#}
     <form id="form_placeholder" action="/test-api-call/">
-    {% csrf_token %}
+        {% csrf_token %}
     </form>
 
 {% endblock %}
 <li>a</li>
 
 {% block js %}
+    <script src="{% static 'js/d3.v3.min.js'%}"></script>
+    <script src="{% static 'js/d3.tip.v0.6.3.js'%}"></script>
     <script>
         function moreInfo(subject, div_suffix) {  /* change 1 - added id parameter*/
             div_id = "#dynamicsubjectdiv" + div_suffix
@@ -192,7 +191,7 @@
                             $(div_id).append(`<div class="col-lg-3 col-md-6 mb-4">
                     <div class="card h-100">
                         <img class="card-img-top" src= "` + image_url + `"alt="cannot load image">
-                        <div class="card-body p-3"><a href="javascript:myFunction(\'`+doc_id+`\')">
+                        <div class="card-body p-3"><a href="javascript:myFunction(\'` + doc_id + `\')">
                             <h4 class="card-title">` + documents[i]["title"] + `</h4></a>
 
                         </div>
@@ -226,7 +225,7 @@
         }
     </script>
 
-        <script>
+    <script>
         //myform = document.getElementById("form_placeholder")
         //csrf_token = token_element[0].value;
         function fetch_subject_match_data() {  /* change 1 - added id parameter*/
@@ -234,33 +233,121 @@
             var array = current_url.split("/");
             element_id = array[array.length - 2]
             desired_document = JSON.parse(localStorage.getItem(element_id));
-            payload = $("#form_placeholder").serialize()+'&'+$.param({ 'document_item': JSON.stringify(desired_document) })
+            payload = $("#form_placeholder").serialize() + '&' + $.param({'document_item': JSON.stringify(desired_document)})
             //payload.document_item = JSON.stringify(desired_document)
             {#div_id = "#dynamicsubjectdiv" + div_suffix#}
             //if (!$(div_id).children().length) {
-                $.ajax({
-                    url: "/get-subject-matches/", /* change 2 - added the id parameter to the api call */
-                    dataType: "json",
-                    type: "POST",
-                    processData: false,
-                    data: payload,
-                    beforeSend: function () {
-                        // Show image container
-                        $("#subject_match_loading_div").show();
-                        {#console.log(csrf_token)#}
-                    },
-                    success: function (data) {
-                        console.log(data)
-                        {#$(div_id).empty();#}
-                        {#documents = data['docs']#}
+            $.ajax({
+                url: "/get-subject-matches/", /* change 2 - added the id parameter to the api call */
+                dataType: "json",
+                type: "POST",
+                processData: false,
+                data: payload,
+                beforeSend: function () {
+                    // Show image container
+                    $("#subject_match_loading_div").show();
+                    {#console.log(csrf_token)#}
+                },
+                success: function (data_ajax) {
+                    console.log(data_ajax)
+                    var margin = {top: 40, right: 20, bottom: 30, left: 70},
+                        width = 460 - margin.left - margin.right,
+                        height = 500 - margin.top - margin.bottom;
 
-                    },
-                    complete: function (data) {
-                        // Hide image container
-                        $("#subject_match_loading_div").hide();
+                    var data = data_ajax
+                        //[{"Employee": "John Doe", "Salary": 58}, {
+                        //"Employee": "Jane Doe",
+                      //  "Salary": 81
+                   // }, {"Employee": "Mary Jane", "Salary": 39}, {
+                   //     "Employee": "Debasis Das",
+                   //     "Salary": 80
+                   // }, {"Employee": "Nishant Singh", "Salary": 99}];
+
+                    var x = d3.scale.ordinal()
+                        .rangeRoundBands([0, width], .1);
+
+                    var y = d3.scale.linear()
+                        .range([height, 0]);
+
+                    var xAxis = d3.svg.axis()
+                        .scale(x)
+                        .orient("bottom");
+
+                    var yAxis = d3.svg.axis()
+                        .scale(y)
+                        .orient("left")
+                        .ticks(10, "");
+
+                    var tip = d3.tip()
+                        .attr('class', 'd3-tip')
+                        .offset([-10, 0])
+                        .html(function (d) {
+                            return "<strong>Viewed document of this subject:</strong> <span style='color:red'>" + d.hits + "</span>";
+                        })
+                    var svg = d3.select("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
+                        .append("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                    svg.call(tip);
+
+
+                    x.domain(data.map(function (d) {
+                        return d.name;
+                    }));
+                    y.domain([0, d3.max(data, function (d) {
+                        return d.hits;
+                    })]);
+
+                    svg.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(xAxis);
+
+                    svg.append("g")
+                        .attr("class", "y axis")
+                        .call(yAxis)
+                        .append("text")
+                        .attr("transform", "rotate(-90)")
+                        .attr("y", -36)
+                        .attr("dy", ".71em")
+                        .style("text-anchor", "end")
+                        .text("Number of documents");
+
+                    svg.selectAll(".bar")
+                        .data(data)
+                        .enter().append("rect")
+                        .attr("class", "bar")
+                        .attr("x", function (d) {
+                            return x(d.name);
+                        })
+                        .attr("width", x.rangeBand())
+                        .attr("y", function (d) {
+                            return y(d.hits);
+                        })
+                        .attr("height", function (d) {
+                            return height - y(d.hits);
+                        })
+                        .on('mouseover', tip.show)
+                        .on('mouseout', tip.hide);
+
+
+                    function type(d) {
+                        d.Salary = +d.Salary;
+                        return d;
                     }
-                });
-          //  }
+
+                    {#$(div_id).empty();#}
+                    {#documents = data['docs']#}
+
+                },
+                complete: function (data) {
+                    // Hide image container
+                    $("#subject_match_loading_div").hide();
+                }
+            });
+            //  }
 
 
         }
@@ -306,7 +393,7 @@
                 console.log("Hello printing")
                 subject_name = subjects[i]
                 subject_name = subject_name.replace(/[^\w]/, '')
-                subject_name_truncated = subject_name.replace(/[^\w]/, '').replace(/\s/g, '').replace(/[()]/g,'')
+                subject_name_truncated = subject_name.replace(/[^\w]/, '').replace(/\s/g, '').replace(/[()]/g, '')
                 console.log(subject_name_truncated)
                 subject_name_plus = subject_name.replace(/\s+/g, '+');
                 $('#subjects_appending_div_id').append('<div class="accordion" id="accordionExample' + subject_name_truncated + '">\n' +
@@ -349,17 +436,17 @@
         }
 
 
-       // window.onbeforeunload = function () {
-         //   console.log('event');
-          //  localStorage.removeItem(element_id)
-            //alert("Hi you are closing")
+        // window.onbeforeunload = function () {
+        //   console.log('event');
+        //  localStorage.removeItem(element_id)
+        //alert("Hi you are closing")
         //    return; //here also can be string, that will be shown to the user
         //}
     </script>
     <script>
         function myFunction(doc_id) {
             {#alert(doc_id);#}
-            window.open("/document-details/"+doc_id+"/","_self")
+            window.open("/document-details/" + doc_id + "/", "_self")
         }
     </script>
 

@@ -112,8 +112,9 @@ def get_subject_match_data(request):
     results = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(subjects) + ')').order_by('-hit_count')
     context_data = []
     for result in results:
+        # print("loop iteration")
         data = {'name': result.subject_text, 'hits': result.hit_count}
         context_data.append(data)
 
     # print(type(result))
-    return JsonResponse(data, safe=False)
+    return JsonResponse(context_data, safe=False)
