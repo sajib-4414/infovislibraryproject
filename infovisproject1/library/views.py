@@ -127,7 +127,7 @@ def get_subject_match_data(request):
                     match.hit_count = count
                     match.save()
             else:
-                new_subject = Subjects(subject_text=subject)
+                new_subject = Subjects(subject_text=subject, hit_count=1)
                 new_subject.save()
             # MyModel.objects.filter(pk=some_value).update(field1='some value')
     return JsonResponse(context_data, safe=False)
