@@ -239,7 +239,7 @@
             {#div_id = "#dynamicsubjectdiv" + div_suffix#}
             //if (!$(div_id).children().length) {
                 $.ajax({
-                    url: "/test-api-call/", /* change 2 - added the id parameter to the api call */
+                    url: "/get-subject-matches/", /* change 2 - added the id parameter to the api call */
                     dataType: "json",
                     type: "POST",
                     processData: false,

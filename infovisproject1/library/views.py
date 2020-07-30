@@ -37,28 +37,28 @@ def my_django_view(request):
     # for key in request.POST:
     #     print(key)
     # print(request.POST)
-    document = request.POST['document_item']
-    doc_json = json.loads(document)
-    subjects = doc_json['subject']
-    print(subjects)
-    a = ['romance','love']
-    results = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(subjects) + ')').order_by('-hit_count')
-    context_data = []
-    for result in results:
-        data = { 'name' : result.subject_text, 'hits': result.hit_count}
-        context_data.append(data)
-
+    # document = request.POST['document_item']
+    # doc_json = json.loads(document)
+    # subjects = doc_json['subject']
+    # print(subjects)
+    # a = ['romance','love']
+    # results = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(subjects) + ')').order_by('-hit_count')
+    # context_data = []
+    # for result in results:
+    #     data = { 'name' : result.subject_text, 'hits': result.hit_count}
+    #     context_data.append(data)
+    #
     # print(type(result))
-    return JsonResponse(data, safe=False)
-    # if request.method == 'GET':
-    #     response = requests.get('http://openlibrary.org/subjects/romance.json?limit=5', params=request.GET)
-    # # else:
-    # #     r = requests.get('https://www.somedomain.com/some/url/save', params=request.GET)
-    # if response.status_code == 200:
-    #     response2= response.json()
-    #     key= response2['key']
-    #     return HttpResponse(str(key))
-    # return HttpResponse('Could not save data'+str(response.status_code))
+    # return JsonResponse(data, safe=False)
+    if request.method == 'GET':
+        response = requests.get('http://openlibrary.org/subjects/romance.json?limit=5', params=request.GET)
+    # else:
+    #     r = requests.get('https://www.somedomain.com/some/url/save', params=request.GET)
+    if response.status_code == 200:
+        response2= response.json()
+        key= response2['key']
+        return HttpResponse(str(key))
+    return HttpResponse('Could not save data'+str(response.status_code))
 
 def search_result(request):
     # post = Post.objects.filter(status='published')
@@ -102,3 +102,18 @@ def document_details(request, olid):
 
     }
     return render(request, template, context)
+
+def get_subject_match_data(request):
+    document = request.POST['document_item']
+    doc_json = json.loads(document)
+    subjects = doc_json['subject']
+    print(subjects)
+    a = ['romance', 'love']
+    results = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(subjects) + ')').order_by('-hit_count')
+    context_data = []
+    for result in results:
+        data = {'name': result.subject_text, 'hits': result.hit_count}
+        context_data.append(data)
+
+    # print(type(result))
+    return JsonResponse(data, safe=False)
