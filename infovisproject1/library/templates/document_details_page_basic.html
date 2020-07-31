@@ -177,6 +177,19 @@
                     },
                     success: function (data) {
                         $(div_id).empty();
+                        number_of_docs = data['numFound']
+                        document_num_string = ""
+                        if(number_of_docs<1000){
+                            if (number_of_docs == 0){
+                                document_num_string = "0"
+                            }
+                            else{
+                                document_num_string = "1k"
+                            }
+                        }
+                        else{
+                            document_num_string = (parseInt( number_of_docs,10)/1000).toFixed(2) + "k"
+                        }
                         documents = data['docs']
                         for (i = 0; i < documents.length; i++) {
 
@@ -201,8 +214,14 @@
                     </div>
                     </div>`);
                         }
-                        $("#subjecttitle" + div_suffix).append(`<a href="#" class="previous round" id="prevb` + div_suffix + `">&#8249;</a>
-                        <a href="#" class="next round" id="nextb` + div_suffix + `">&#8250;</a>`)
+                        $("#subjecttitle" + div_suffix).append(`
+                        <div style="float: left; font-size:15px; font-color: #808080; line-height:0.5;margin-top:6px;" class="d-flex flex-column">
+  <div class="p-1"><span style="font-weight:normal">(Total books:</span> <span style="font-weight:500">`+document_num_string+`) </span></div>
+{#(5k<br> Number of documents in this subject)#}
+</div>
+`)
+                        $("#subjecttitle" + div_suffix).append(`<div style="float: right;font-size: 35px;margin-right: 20px"><a href="#" class="previous round" id="prevb` + div_suffix + `">&#8249;</a>
+                        <a href="#" class="next round" id="nextb` + div_suffix + `">&#8250;</a> </div>`)
                         $(div_id).slick({
                             infinite: false,
                             slidesToShow: 4,
@@ -304,13 +323,13 @@
                         .attr("class", "x axis")
                         .attr("transform", "translate(20," + height + ")")
                         .call(xAxis)
-                        {#.append("text")#}
-                        {#.attr("class", "axis-title")#}
-                        {#.attr("y", 28)#}
-                        {#.attr("dy", ".05em")#}
-                        {##}
-                        {#.text("Subjects ->")#}
-                        {#.attr("font-size", "13px");;#}
+                    {#.append("text")#}
+                    {#.attr("class", "axis-title")#}
+                    {#.attr("y", 28)#}
+                    {#.attr("dy", ".05em")#}
+                    {##}
+                    {#.text("Subjects ->")#}
+                    {#.attr("font-size", "13px");;#}
 
                     svg.append("g")
                         .attr("class", "y axis")
@@ -407,11 +426,11 @@
                 subject_name_plus = subject_name.replace(/\s+/g, '+');
                 $('#subjects_appending_div_id').append('<div class="accordion" id="accordionExample' + subject_name_truncated + '">\n' +
                     '                <div class="card">\n' +
-                    '                    <div class="" id="headingTwo">\n' +
+                    '                    <div class="" id="headingTwo' + subject_name_truncated + '">\n' +
                     '                        <h2 class="mb-0" id="subjecttitle' + subject_name_truncated + '">\n' +
                     '\n' +
                     '\n' +
-                    '                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"\n' +
+                    '                            <button style="float: left;" class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"\n' +
                     '                                    data-target="#collapseTwo' + subject_name_truncated + '"\n' +
                     '                                    aria-expanded="false" aria-controls="collapseTwo"\n' +
                     '                                    onClick="moreInfo(' + '\'' + subject_name_plus + '\',\'' + subject_name_truncated + '\')">' + subject_name +
@@ -425,7 +444,7 @@
                     '                    <div id="collapseTwo' + subject_name_truncated + '" class="collapse"\n' +
                     '                         aria-labelledby="headingTwo"\n' +
                     '                         data-parent="#accordionExample' + subject_name_truncated + '">\n' +
-                    '                        <div class="card-body">\n' +
+                    '                        <div class="card-body" id="image-container">\n' +
                     '\n' +
                     '                            {#                            loader start#}\n' +
                     '                            <div class="spinner-border"\n' +
