@@ -162,8 +162,8 @@
 <li>a</li>
 
 {% block js %}
-    <script src="{% static 'js/d3.v3.min.js'%}"></script>
-    <script src="{% static 'js/d3.tip.v0.6.3.js'%}"></script>
+    <script src="{% static 'js/d3.v3.min.js' %}"></script>
+    <script src="{% static 'js/d3.tip.v0.6.3.js' %}"></script>
     <script>
         function moreInfo(subject, div_suffix) {  /* change 1 - added id parameter*/
             div_id = "#dynamicsubjectdiv" + div_suffix
@@ -251,20 +251,20 @@
                 success: function (data_ajax) {
                     console.log(data_ajax)
                     var margin = {top: 40, right: 20, bottom: 30, left: 70},
-                        width = 460 - margin.left - margin.right,
-                        height = 500 - margin.top - margin.bottom;
+                        width = 1000 - margin.left - margin.right,
+                        height = 350 - margin.top - margin.bottom;
 
                     var data = data_ajax
-                        //[{"Employee": "John Doe", "Salary": 58}, {
-                        //"Employee": "Jane Doe",
-                      //  "Salary": 81
-                   // }, {"Employee": "Mary Jane", "Salary": 39}, {
-                   //     "Employee": "Debasis Das",
-                   //     "Salary": 80
-                   // }, {"Employee": "Nishant Singh", "Salary": 99}];
+                    //[{"Employee": "John Doe", "Salary": 58}, {
+                    //"Employee": "Jane Doe",
+                    //  "Salary": 81
+                    // }, {"Employee": "Mary Jane", "Salary": 39}, {
+                    //     "Employee": "Debasis Das",
+                    //     "Salary": 80
+                    // }, {"Employee": "Nishant Singh", "Salary": 99}];
 
                     var x = d3.scale.ordinal()
-                        .rangeRoundBands([0, width], .1);
+                        .rangeRoundBands([0, width / 5], .1);
 
                     var y = d3.scale.linear()
                         .range([height, 0]);
@@ -302,8 +302,15 @@
 
                     svg.append("g")
                         .attr("class", "x axis")
-                        .attr("transform", "translate(0," + height + ")")
-                        .call(xAxis);
+                        .attr("transform", "translate(20," + height + ")")
+                        .call(xAxis)
+                        {#.append("text")#}
+                        {#.attr("class", "axis-title")#}
+                        {#.attr("y", 28)#}
+                        {#.attr("dy", ".05em")#}
+                        {##}
+                        {#.text("Subjects ->")#}
+                        {#.attr("font-size", "13px");;#}
 
                     svg.append("g")
                         .attr("class", "y axis")
@@ -313,7 +320,9 @@
                         .attr("y", -36)
                         .attr("dy", ".71em")
                         .style("text-anchor", "end")
-                        .text("Number of documents");
+                        .text("Number of documents viewed")
+                        .attr("font-size", "13px");
+
 
                     svg.selectAll(".bar")
                         .data(data)
