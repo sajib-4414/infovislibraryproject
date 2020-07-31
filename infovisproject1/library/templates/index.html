@@ -53,9 +53,8 @@
                                      src="http://covers.openlibrary.org/b/id/{{ book.cover_i }}-M.jpg"
                                      alt="cannot load image">
                             {% else %}
-                                <img class="card-img-top"
-                                     src="http://covers.openlibrary.org/b/id/{{ book.cover_i }}-M.jpg"
-                                     alt="cannot load image">
+                                <img class="card-img-top" src="{% static 'images/image-not-found-1024x576.png' %}" class="card-img-top"
+                                 alt="image not found">
                             {% endif %}
 
                             <div class="card-body p-3">
@@ -118,9 +117,8 @@
                                      src="http://covers.openlibrary.org/b/id/{{ book.cover_i }}-M.jpg"
                                      alt="cannot load image">
                             {% else %}
-                                <img class="card-img-top"
-                                     src="http://covers.openlibrary.org/b/id/{{ book.cover_i }}-M.jpg"
-                                     alt="cannot load image">
+                                <img class="card-img-top" src="{% static 'images/image-not-found-1024x576.png' %}" class="card-img-top"
+                                 alt="image not found">
                             {% endif %}
                             <div class="card-body p-3">
                                 <a class="url-event-romance" href="{% url 'library:details' book.seed.0|to_and %}"><h4
@@ -182,9 +180,8 @@
                                      src="http://covers.openlibrary.org/b/id/{{ book.cover_i }}-M.jpg"
                                      alt="cannot load image">
                             {% else %}
-                                <img class="card-img-top"
-                                     src="http://covers.openlibrary.org/b/id/{{ book.cover_i }}-M.jpg"
-                                     alt="cannot load image">
+                                <img class="card-img-top" src="{% static 'images/image-not-found-1024x576.png' %}" class="card-img-top"
+                                 alt="image not found">
                             {% endif %}
                             <div class="card-body p-3">
                                 <a class="url-event-arts" href="{% url 'library:details' book.seed.0|to_and %}"><h4
