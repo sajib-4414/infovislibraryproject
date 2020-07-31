@@ -207,8 +207,17 @@
 
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="btn btn-primary">Find Out More!</a>
-                        </div>
+                                {#                            <a href="#" class="btn btn-primary">Find Out More!</a>#}
+                                <div class="row">
+                                    <div class="col-sm-3 p-0 border"><i class="fa fa-tablet" aria-hidden="true"></i>
+                                        <br>Ebook
+                                    </div>
+                                    <div class="col-sm-4 p-0 border">{% random_float 3.5 5 %} <i class="fa fa-star" aria-hidden="true"></i>
+                                        <br> Ratings
+                                    </div>
+                                    <div class="col-sm-5 p-0 border"><b>{% random_int 3 10 %}k</b><br>Borrowings</div>
+
+                                </div>
                     </div>
                     </div>`);
                         }
@@ -431,7 +440,7 @@
                 console.log("Hello printing")
                 subject_name = subjects[i]
                 subject_name = subject_name.replace(/[^\w]/, '')
-                subject_name_truncated = subject_name.replace(/[^\w]/, '').replace(/\s/g, '').replace(/[()]/g, '')
+                subject_name_truncated = subject_name.replace(/[^\w]/, '').replace(/\s/g, '').replace(/[().]/g, '').replace(/[\[\]']+/g,'')
                 console.log(subject_name_truncated)
                 subject_name_plus = subject_name.replace(/\s+/g, '+');
                 $('#subjects_appending_div_id').append('<div class="accordion" id="accordionExample' + subject_name_truncated + '">\n' +

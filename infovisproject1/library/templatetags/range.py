@@ -22,7 +22,7 @@ def replace_space_with_plus(value):
 
 @register.filter
 def remove_special_characters(value):
-    plain_value = re.sub("[!@#$&/.'()]", '', value)
+    plain_value = re.sub("[!@#$&/.'()/[/]]", '', value)
     return plain_value
 
 @register.simple_tag
