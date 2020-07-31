@@ -23,7 +23,7 @@
     <div class="row">
 
         <div class="col-md-4">
-            <img class="img-fluid" src="{{ document.cover.medium }}" width="300px" alt="">
+            <img class="img-fluid" id="detailspageimageid" width="300px" alt="">
         </div>
 
         <div class="col-md-8">
@@ -45,7 +45,7 @@
             <div class="card-footer">
                 {#                            <a href="#" class="btn btn-primary">Find Out More!</a>#}
                 <div class="row">
-                    <div class="col-sm-4 ">4.5 <i class="fa fa-star" aria-hidden="true"></i> <br> Ratings</div>
+                    <div class="col-sm-4 ">{% random_float 3.5 5 %} <i class="fa fa-star" aria-hidden="true"></i> <br> Ratings</div>
                     <div class="col-sm-5 "><b>5k</b><br>Borrowings</div>
 
                 </div>
@@ -75,7 +75,7 @@
                 </div>
                 {#                            loader ends#}
                 <div class="card-body">
-                    <svg width="1000" height="500"></svg>
+                    <svg width="1000" height="500" id="graphsvgid"></svg>
 
                 </div>
             </div>
@@ -126,33 +126,33 @@
         {#        {% endfor %}#}
     </div>
 
-    <div class="row">
-
-        <div class="col-md-3 col-sm-6 mb-4">
-            <a href="#">
-                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-            </a>
-        </div>
-
-        <div class="col-md-3 col-sm-6 mb-4">
-            <a href="#">
-                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-            </a>
-        </div>
-
-        <div class="col-md-3 col-sm-6 mb-4">
-            <a href="#">
-                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-            </a>
-        </div>
-
-        <div class="col-md-3 col-sm-6 mb-4">
-            <a href="#">
-                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-            </a>
-        </div>
-
-    </div>
+{#    <div class="row">#}
+{##}
+{#        <div class="col-md-3 col-sm-6 mb-4">#}
+{#            <a href="#">#}
+{#                <img class="img-fluid" src="http://placehold.it/500x300" alt="">#}
+{#            </a>#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-3 col-sm-6 mb-4">#}
+{#            <a href="#">#}
+{#                <img class="img-fluid" src="http://placehold.it/500x300" alt="">#}
+{#            </a>#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-3 col-sm-6 mb-4">#}
+{#            <a href="#">#}
+{#                <img class="img-fluid" src="http://placehold.it/500x300" alt="">#}
+{#            </a>#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-3 col-sm-6 mb-4">#}
+{#            <a href="#">#}
+{#                <img class="img-fluid" src="http://placehold.it/500x300" alt="">#}
+{#            </a>#}
+{#        </div>#}
+{##}
+{#    </div>#}
     {#    end of row#}
     <form id="form_placeholder" action="/test-api-call/">
         {% csrf_token %}
@@ -179,16 +179,14 @@
                         $(div_id).empty();
                         number_of_docs = data['numFound']
                         document_num_string = ""
-                        if(number_of_docs<1000){
-                            if (number_of_docs == 0){
+                        if (number_of_docs < 1000) {
+                            if (number_of_docs == 0) {
                                 document_num_string = "0"
-                            }
-                            else{
+                            } else {
                                 document_num_string = "1k"
                             }
-                        }
-                        else{
-                            document_num_string = (parseInt( number_of_docs,10)/1000).toFixed(2) + "k"
+                        } else {
+                            document_num_string = (parseInt(number_of_docs, 10) / 1000).toFixed(2) + "k"
                         }
                         documents = data['docs']
                         for (i = 0; i < documents.length; i++) {
@@ -216,7 +214,7 @@
                         }
                         $("#subjecttitle" + div_suffix).append(`
                         <div style="float: left; font-size:15px; font-color: #808080; line-height:0.5;margin-top:6px;" class="d-flex flex-column">
-  <div class="p-1"><span style="font-weight:normal">(Total books:</span> <span style="font-weight:500">`+document_num_string+`) </span></div>
+  <div class="p-1"><span style="font-weight:normal">(Total books:</span> <span style="font-weight:500">` + document_num_string + `) </span></div>
 {#(5k<br> Number of documents in this subject)#}
 </div>
 `)
@@ -248,6 +246,11 @@
         //myform = document.getElementById("form_placeholder")
         //csrf_token = token_element[0].value;
         function fetch_subject_match_data() {  /* change 1 - added id parameter*/
+            graph_element = document.getElementById("graphsvgid")
+            if (graph_element.childNodes.length > 0) { // Or just `if (element.childNodes.length)`
+                // It has at least one
+                return
+            }
             current_url = window.location.href
             var array = current_url.split("/");
             element_id = array[array.length - 2]
@@ -409,6 +412,13 @@
             document.getElementById("latest_edition_id").innerHTML = "Not available"
             document.getElementById("first_publish_year_id").innerHTML = "Not available"
         }
+        if ("cover_i" in desired_document && desired_document.cover_i.length>0){
+            $("#detailspageimageid").attr("src", "http://covers.openlibrary.org/b/id/{{ desired_document.cover_i }}-L.jpg");
+        }
+        else{
+            $("#detailspageimageid").attr("src", "{% static 'images/image-not-found-1024x576.png' %}");
+        }
+
 
 
         document.getElementById("edition_count_id").innerHTML = desired_document.edition_count
@@ -461,6 +471,8 @@
             }
         } else {
             document.getElementById("explore_relevant_subjects_id").style.display = "none";
+            document.getElementById("accordionExample").style.display = "none";
+
         }
 
 
