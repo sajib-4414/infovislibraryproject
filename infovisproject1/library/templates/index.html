@@ -128,7 +128,17 @@
                                 {#                            <p class="card-text">Author: "{{ book.authors.first.name }}"</p>#}
                             </div>
                             <div class="card-footer">
-                                <a href="#" class="btn btn-primary">Find Out More!</a>
+                                {#                            <a href="#" class="btn btn-primary">Find Out More!</a>#}
+                                <div class="row">
+                                    <div class="col-sm-3 p-0 border"><i class="fa fa-tablet" aria-hidden="true"></i>
+                                        <br>Ebook
+                                    </div>
+                                    <div class="col-sm-4 p-0 border">4.5 <i class="fa fa-star" aria-hidden="true"></i>
+                                        <br> Ratings
+                                    </div>
+                                    <div class="col-sm-5 p-0 border"><b>5k</b><br>Borrowings</div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -136,6 +146,8 @@
                 {% endfor %}
             </div>
             <!-- /.row -->
+        <a href="/search?keywords=romance&pagenum=1" class="btn btn-primary float-right">See more in this
+                subject!</a>
 
         </div>
     </div>
@@ -180,7 +192,17 @@
                                 {#                            <p class="card-text">Author: "{{ book.authors.first.name }}"</p>#}
                             </div>
                             <div class="card-footer">
-                                <a href="#" class="btn btn-primary">Find Out More!</a>
+                                {#                            <a href="#" class="btn btn-primary">Find Out More!</a>#}
+                                <div class="row">
+                                    <div class="col-sm-3 p-0 border"><i class="fa fa-tablet" aria-hidden="true"></i>
+                                        <br>Ebook
+                                    </div>
+                                    <div class="col-sm-4 p-0 border">4.5 <i class="fa fa-star" aria-hidden="true"></i>
+                                        <br> Ratings
+                                    </div>
+                                    <div class="col-sm-5 p-0 border"><b>5k</b><br>Borrowings</div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -188,6 +210,8 @@
                 {% endfor %}
             </div>
             <!-- /.row -->
+        <a href="/search?keywords=arts&pagenum=1" class="btn btn-primary float-right">See more in this
+                subject!</a>
 
         </div>
     </div>
