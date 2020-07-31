@@ -14,20 +14,46 @@ def get_books_of_subjects(subject):
     if response.status_code == 200:
         json_response = response.json()
         books = json_response['docs']
-        return books
+        return [books,int(json_response['numFound'])]
     return []
 
 
 def index(request):
     # post = Post.objects.filter(status='published')
     template = 'index.html'
-    romance_books = get_books_of_subjects("romance")
-    thriller_books = get_books_of_subjects("thriller");
-    arts_books = get_books_of_subjects("arts");
+    romance_books,numbers_r = get_books_of_subjects("romance")
+    thriller_books,numbers_t = get_books_of_subjects("thriller");
+    arts_books,numbers_a = get_books_of_subjects("arts");
+    r_num_str = ""
+    if numbers_r == 0:
+        r_num_str = "0"
+    elif numbers_r < 1000:
+        r_num_str = "1k"
+    else:
+        r_num_str = str(float("{:.2f}".format(numbers_r/1000))) + "k"
+
+    t_num_str = ""
+    if numbers_t == 0:
+        t_num_str = "0"
+    elif numbers_t < 1000:
+        t_num_str = "1k"
+    else:
+        t_num_str = str(float("{:.2f}".format(numbers_t/1000))) + "k"
+
+    a_num_str = ""
+    if numbers_a == 0:
+        a_num_str = "0"
+    elif numbers_a < 1000:
+        a_num_str = "1k"
+    else:
+        a_num_str = str(float("{:.2f}".format(numbers_a/1000))) + "k"
     context = {
         "romance_books" : romance_books,
         "thriller_books": thriller_books,
-        "arts_books"    : arts_books
+        "arts_books"    : arts_books,
+        "romance_book_count": r_num_str,
+        "thriller_book_count": t_num_str,
+        "arts_book_count": a_num_str
     }
     # print(romance_books)
     return render(request, template, context)
