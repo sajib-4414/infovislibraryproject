@@ -21,8 +21,9 @@
     <div class="card p-3" id="card_body_id">
         {% for document in documents %}
             <div class="card mb-3">
-                <div class="row no-gutters">
-                    <div class="col-md-2">
+            <div class="flex-column">
+            <div class="row no-gutters">
+                   <div class="col-md-2">
                         {% if document.cover_i %}
                             <img src="http://covers.openlibrary.org/b/id/{{ document.cover_i }}-M.jpg"
                                  class="card-img-top"
@@ -32,7 +33,7 @@
                                  alt="image not found">
                         {% endif %}
                     </div>
-                    <div class="col-md-8">
+                <div class="col-md-9">
                         <div class="card-body">
                             <a class="url-event" href="{% url 'library:details' document.seed.0|to_and %}"><h5
                                     class="card-title">{{ document.title }}</h5></a>
@@ -42,9 +43,29 @@
                             <p class="card-text"><small class="text-muted">Last updated <u> {% random_int 10 50 %} </u> mins ago</small></p>
                         </div>
                     </div>
+                <div class="card-footer col-md-1" style="float: right;text-align: center">
+                                {#                            <a href="#" class="btn btn-primary">Find Out More!</a>#}
+                                <div class="flex-column">
+                                    <div class="col-sm-12 p-0 border-bottom"><i class="fa fa-tablet" aria-hidden="true"></i>
+                                        <br>Ebook
+                                    </div>
+                                    <div class="col-sm-12 p-0 border-bottom">{% random_float 3.5 5 %} <i class="fa fa-star" aria-hidden="true"></i>
+                                        <br> Ratings
+                                    </div>
+                                    <div class="col-sm-12 p-0"><b>{% random_int 3 10 %}k</b><br>Borrowings</div>
+
+                                </div>
                 </div>
 
-                <div class="accordion" id="accordionExample">
+
+
+
+
+
+
+
+            </div>
+            <div class="accordion" id="accordionExample">
                     <div class="card">
                         <div class="" id="headingTwo">
                             <h2 class="mb-0">
@@ -79,8 +100,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+
 
 
         {% endfor %}
