@@ -137,7 +137,7 @@ def get_subject_match_data(request):
         subjects = doc_json['subject']
         print(subjects)
         # a = ['romance', 'love']
-        results = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(subjects) + ')').order_by('-hit_count')
+        results = Subjects.objects.filter(subject_text__iregex=r'(' + '|'.join(subjects) + ')').order_by('-hit_count')[:10]
 
         for result in results:
             # print("loop iteration")

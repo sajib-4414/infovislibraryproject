@@ -64,7 +64,7 @@
                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
                             onclick="fetch_subject_match_data()">
-                        See how this document subjects matches your interests
+                        See how this document subjects matches your top interests
                     </button>
                 </h2>
             </div>
@@ -295,7 +295,7 @@
                     // }, {"Employee": "Nishant Singh", "Salary": 99}];
 
                     var x = d3.scale.ordinal()
-                        .rangeRoundBands([0, width / 5], .1);
+                        .rangeRoundBands([0, width / 1.5], .1);
 
                     var y = d3.scale.linear()
                         .range([height, 0]);
