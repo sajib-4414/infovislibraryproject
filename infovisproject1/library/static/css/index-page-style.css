@@ -2,4 +2,11 @@
     color: #09529b !important;
     font-size: 40px;
 }
+.card-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 220px;
+    height: 1.2em;
+    white-space: nowrap;
+}
 
