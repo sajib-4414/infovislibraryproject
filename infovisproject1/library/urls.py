@@ -10,4 +10,5 @@ urlpatterns = [
     path('document-details/<str:olid>/', views.document_details, name='details'),
     path('test-api-call/', views.my_django_view, name='my_django_view'),
     path('get-subject-matches/', views.get_subject_match_data, name='get_subject_match_data'),
+    path('get-my-viewings/', views.get_my_subject_viewings, name='get_my_subject_viewings'),
 ]

@@ -157,3 +157,21 @@ def get_subject_match_data(request):
                 new_subject.save()
             # MyModel.objects.filter(pk=some_value).update(field1='some value')
     return JsonResponse(context_data, safe=False)
+
+def get_my_subject_viewings(request):
+    template = 'my_reading_patterns.html'
+    results = Subjects.objects.all().order_by('-hit_count')[:10]
+    # document_olid = olid
+    # query = 'https://openlibrary.org/api/books?bibkeys=OLID:' + document_olid + '&jscmd=data&format=json'
+    # r = requests.get(query)
+    # response = r.json()
+    # document = response['OLID:'+document_olid]
+    context_data = []
+    for result in results:
+        # print("loop iteration")
+        data = {'name': result.subject_text, 'hits': result.hit_count}
+        context_data.append(data)
+    context = {
+        "reading_data": context_data
+    }
+    return render(request, template, context)
