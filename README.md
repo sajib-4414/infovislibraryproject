@@ -9,7 +9,9 @@ search results and topic related related visualization in this project.
 - Book detail page: url: /document-details/book-id/
 
 shows book cover, book type, ratings, and edition informations. Also shows subject related matchings graph. If you have previously gone through books of similar subjects,
-you will be able to see a graph here showing that. 
+you will be able to see a graph here showing that.
+<img src="/media-resources/screenshot-subject-match-graph.PNG" width="550">
+
 
 In addition you will be able to see books relevant to the particular book you are viewing, according to subject matching.
 - My book reading pattern page: url: /get-my-viewings/
