@@ -19,3 +19,12 @@ In addition you will be able to see books relevant to the particular book you ar
 In this page you will see all the number of books you have viewed of different subjects. So, you will get an idea about your reading pattern.
 
 <img src="/media-resources/screenshot-my-top-book-viewings.PNG" width="550">
+
+### Information visualization principles used:
+- I have also implemented Schneiderman’s principle [1] of overview first,zoom and filter, and details on demand principle.
+- I have followed the gestalt principle of proximity and closure in theinterface in document detail and home page
+- The system maintained a good level of expressiveness by showing anadequate level of information on demand. 
+- The system maintained the data-ink ratio by showing less importantdata with background colours.
+
+#### References:
+[1] B. Shneiderman. Ieee symposium on visual languages. InThe eyes have it:a task by data type taxonomy for information visualizations, pp. 336–343.IEEE, New York, NY, USA, 1996. doi: 10.1109/VL.1996.545307
