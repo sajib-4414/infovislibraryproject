@@ -17,3 +17,5 @@ In addition you will be able to see books relevant to the particular book you ar
 - My book reading pattern page: url: /get-my-viewings/
 
 In this page you will see all the number of books you have viewed of different subjects. So, you will get an idea about your reading pattern.
+
+<img src="/media-resources/screenshot-my-top-book-viewings.PNG" width="550">
